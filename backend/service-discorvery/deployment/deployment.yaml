@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-discovery
+  labels:
+    app: service-discovery
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-discovery
+  template:
+    metadata:
+      labels:
+        app: service-discovery
+    spec:
+      containers:
+      - name: service-discovery
+        image: gojeasuk3/service-discovery:dev
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8761
+        env:
+        - name: SERVICE_DISCOVERY_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: paldo-config
+              key: SERVICE_DISCOVERY_PORT
