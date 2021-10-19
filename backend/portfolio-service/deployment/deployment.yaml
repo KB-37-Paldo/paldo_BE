@@ -26,11 +26,6 @@ spec:
             configMapKeyRef:
               name: paldo-config
               key: PORTFOLIO_SERVICE_PORT
-        - name: DB_SERVER
-          valueFrom:
-            configMapKeyRef:
-              name: paldo-config
-              key: DB_SERVER
         - name: DB_PORT
           valueFrom:
             configMapKeyRef:
