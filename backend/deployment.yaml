@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: paldo
+  labels:
+    app: paldo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: paldo
+  template:
+    metadata:
+      labels:
+        app: paldo
+    spec:
+      containers:
+      - name: service-discovery
+        image: gojeasuk3/service-discovery:dev
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8761
+        env:
+        - name: SERVICE_DISCOVERY_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: paldo-config
+              key: SERVICE_DISCOVERY_PORT
+      - name: api-gateway
+        image: gojeasuk3/api-gateway:dev
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        env:
+        - name: SAPI_GATEWAY_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: paldo-config
+              key: API_GATEWAY_PORT
+        - name: SERVICE_DISCOVERY_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: paldo-config
+              key: SERVICE_DISCOVERY_PORT
+      - name: portfolio-service
+        image: gojeasuk3/portfolio-service:dev
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8001
+        env:
+        - name: PORTFOLIO_SERVICE_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: paldo-config
+              key: PORTFOLIO_SERVICE_PORT
+        - name: DB_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: paldo-config
+              key: DB_SERVER
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: paldo-config
+              key: DB_PORT
+        - name: PORTFOLIO_DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: paldo-config
+              key: PORTFOLIO_DB_NAME
+        - name: DB_USERNAME
+          valueFrom:
+            configMapKeyRef:
+              name: paldo-config
+              key: DB_USERNAME
+        - name: DB_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: paldo-config
+              key: DB_PASSWORD
+        - name: SERVICE_DISCOVERY_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: paldo-config
+              key: SERVICE_DISCOVERY_PORT
