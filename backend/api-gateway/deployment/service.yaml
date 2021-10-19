@@ -4,6 +4,6 @@ metadata:
   name: api-gateway
 spec:
   ports:
-  - port: 8761
+  - port: 8000
   selector:
     app: service-discovery

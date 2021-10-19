@@ -6,7 +6,7 @@ data:
   # service-discovery
   SERVICE_DISCOVERY_PORT: "8761"
   # db
-  DB_SERVER: mysql.mysql
+  # DB_SERVER: mysql.mysql
   DB_PORT: "3306"
   DB_USERNAME: root
   DB_PASSWORD: passw0rd
