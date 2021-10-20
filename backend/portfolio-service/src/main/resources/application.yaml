@@ -1,5 +1,7 @@
 server:
   port: ${PORTFOLIO_SERVICE_PORT:8001}
+  servlet:
+    context-path: ${PORTFOLIO_SERVICE_CONTEXT_PATH:/portfolio-service}
 
 spring:
   application:

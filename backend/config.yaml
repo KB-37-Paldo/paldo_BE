@@ -3,16 +3,13 @@ kind: ConfigMap
 metadata:
   name: paldo-config
 data:
-  # service-discovery
-  SERVICE_DISCOVERY_PORT: "8761"
   # db
   DB_SERVER: mysql
   DB_PORT: "3306"
   DB_USERNAME: root
   DB_PASSWORD: passw0rd
-  # api-gateway
-  API_GATEWAY_PORT: "8000"
   # portfolio
+  PORTFOLIO_SERVICE_CONTEXT_PATH: /portfolio-service
   PORTFOLIO_SERVICE_PORT: "8001"
   PORTFOLIO_DB_NAME: portfolio
   # kafka

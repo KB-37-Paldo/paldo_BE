@@ -21,6 +21,11 @@ spec:
         ports:
         - containerPort: 8001
         env:
+        - name: PORTFOLIO_SERVICE_CONTEXT_PATH
+          valueFrom:
+            configMapKeyRef:
+              name: paldo-config
+              key: PORTFOLIO_SERVICE_CONTEXT_PATH
         - name: PORTFOLIO_SERVICE_PORT
           valueFrom:
             configMapKeyRef:
@@ -51,8 +56,3 @@ spec:
             configMapKeyRef:
               name: paldo-config
               key: DB_PASSWORD
-        - name: SERVICE_DISCOVERY_PORT
-          valueFrom:
-            configMapKeyRef:
-              name: paldo-config
-              key: SERVICE_DISCOVERY_PORT
