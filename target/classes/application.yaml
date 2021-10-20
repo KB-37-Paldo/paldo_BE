@@ -20,7 +20,8 @@ spring:
       connection-test-query: SELECT 1
 
 mybatis:
-  type-aliases-package: com.paldo.portfolioservice.model
+  type-aliases-package: com.example.portfolioservice.model
+  mapper-locations: mybatis/mapper/**/*.xml
 
 management:
   endpoints:
