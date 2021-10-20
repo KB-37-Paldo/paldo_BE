@@ -50,7 +50,7 @@ podTemplate(
 		//-- 환경변수 파일 읽어서 변수값 셋팅 
 		String stageName = ""
             
-		def props = readProperties  file:"portfolio-service/deployment/pipeline.properties"
+		def props = readProperties  file:"deployment/pipeline.properties"
 		
 		// Docker Hub Info.
 		def tag = props["version"]
