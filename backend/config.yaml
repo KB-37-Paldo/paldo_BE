@@ -9,6 +9,7 @@ data:
   DB_USERNAME: root
   DB_PASSWORD: passw0rd
   # portfolio
+  PORTFOLIO_SERVICE_CONTEXT_PATH: /portfolio-service
   PORTFOLIO_SERVICE_PORT: "8001"
   PORTFOLIO_DB_NAME: portfolio
   # kafka
