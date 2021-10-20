@@ -19,6 +19,9 @@ spring:
       minimum-idle: 2
       connection-test-query: SELECT 1
 
+mybatis:
+  type-aliases-package: com.paldo.portfolioservice.model
+
 management:
   endpoints:
     web:
