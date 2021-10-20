@@ -1,7 +1,6 @@
 server:
   port: ${PORTFOLIO_SERVICE_PORT:8001}
 
-
 spring:
   application:
     name: portfolio-service
@@ -17,20 +16,6 @@ spring:
       maximum-pool-size: 30
       minimum-idle: 2
       connection-test-query: SELECT 1
-
-  jpa:
-    hibernate:
-      ddl-auto: create
-
-eureka:
-  instance:
-    instance-id: ${spring.cloud.client.hostname}:${spring.application.instance_id:${random.value}}
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://${SERVICE_DISCORVERY_ADDRESS:localhost}:${SERVICE_DISCORVERY_PORT:8761}/eureka
-
 
 management:
   endpoints:
