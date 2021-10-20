@@ -10,7 +10,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /svc-discovery
         pathType: Prefix
         backend:
           service:
@@ -24,7 +24,7 @@ spec:
             name: api-gateway
             port:
               number: 8000
-      - path: /portfolio-svc
+      - path: /
         pathType: Prefix
         backend:
           service:
