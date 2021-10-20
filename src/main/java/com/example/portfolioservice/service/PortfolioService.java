@@ -11,7 +11,7 @@ public interface PortfolioService {
     public List<UserDto> findAll();
 
     // 유저의 포트폴리오 조회
-    public PortfolioDto findByUserID(long user_id);
+    public PortfolioDto findByUserId(long user_id);
 
     // 포트폴리오 조회
     public PortfolioDto findByPortfolioId(long portfolio_id);

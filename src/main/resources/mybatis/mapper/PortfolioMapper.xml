@@ -6,7 +6,7 @@
     <select id="findByUserId" parameterType="long" resultType="PortfolioDto">
         SELECT *
         FROM portfolio
-        WHERE user_id = #{user_id};
+        WHERE user_id = #{user_id}
     </select>
     <select id="findAll" resultType="PortfolioDto">
         SELECT *

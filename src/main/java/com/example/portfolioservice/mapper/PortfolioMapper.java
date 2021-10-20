@@ -7,6 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface PortfolioMapper {
-    PortfolioDto findByUserID(long user_id);
+    PortfolioDto findByUserId(long user_id);
     List<PortfolioDto> findAll();
 }

@@ -18,7 +18,7 @@ public class PortfolioController {
     // 포트폴리오 조회
     @GetMapping(value = "/{id}/portfolio")
     public ResponseEntity<Object> getUserPortfolio(@PathVariable("id") long user_id) {
-        PortfolioDto portfolioDto = portfolioService.findByUserID(user_id);
+        PortfolioDto portfolioDto = portfolioService.findByUserId(user_id);
         return ResponseEntity.ok(portfolioDto);
     }
 
@@ -32,8 +32,8 @@ public class PortfolioController {
     // test
     @GetMapping(value = "/test")
     public ResponseEntity<Object> getAll() {
-        List<PortfolioDto> portfolioDtos = portfolioService.findPortfolioAll();
-        return ResponseEntity.ok(portfolioDtos);
+        List<PortfolioDto> portfolios = portfolioService.findPortfolioAll();
+        return ResponseEntity.ok(portfolios);
     }
 
 }

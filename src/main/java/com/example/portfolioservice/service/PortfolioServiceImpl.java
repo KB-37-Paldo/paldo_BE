@@ -23,8 +23,8 @@ public class PortfolioServiceImpl implements PortfolioService{
     }
 
     @Override
-    public PortfolioDto findByUserID(long user_id) {
-        return sqlsession.getMapper(PortfolioMapper.class).findByUserID(user_id);
+    public PortfolioDto findByUserId(long user_id) {
+        return sqlsession.getMapper(PortfolioMapper.class).findByUserId(user_id);
     }
 
     @Override
