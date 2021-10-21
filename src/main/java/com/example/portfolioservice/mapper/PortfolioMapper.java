@@ -9,4 +9,8 @@ import java.util.List;
 public interface PortfolioMapper {
     PortfolioDto findByUserId(long user_id);
     List<PortfolioDto> findAll();
+    
+    List<PortfolioDto> createPortfolio();
+    
+    
 }

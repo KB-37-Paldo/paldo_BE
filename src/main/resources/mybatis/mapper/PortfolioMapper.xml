@@ -35,5 +35,12 @@
         FROM PORTFOLIO
     </select>
 
-
+	
+	
+	<insert id="createPortfolio" parameterType="PortfolioDto" >
+        SELECT *
+        FROM PORTFOLIO
+    </insert>
+	
+	
 </mapper>

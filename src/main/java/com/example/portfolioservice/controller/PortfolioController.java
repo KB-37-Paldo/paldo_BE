@@ -37,4 +37,17 @@ public class PortfolioController {
         entityModel.add(linkBuilder.withRel("test"));
         return entityModel;
     }
+    
+    
+    // 포트폴리오 생성 
+    @GetMapping(value = "/portfolios")
+    public EntityModel<List<PortfolioDto>> getPortfolios() {
+        EntityModel<List<PortfolioDto>> entityModel = EntityModel.of(portfolioService.findAll());
+        WebMvcLinkBuilder linkBuilder = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getPortfolios());
+        entityModel.add(linkBuilder.withRel("test"));
+        return entityModel;
+    }
+    
+    
+    
 }

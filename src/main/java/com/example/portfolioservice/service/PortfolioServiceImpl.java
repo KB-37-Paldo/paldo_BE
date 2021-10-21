@@ -1,15 +1,14 @@
 package com.example.portfolioservice.service;
 
 
-import com.example.portfolioservice.mapper.PortfolioMapper;
-import com.example.portfolioservice.mapper.UserMapper;
-import com.example.portfolioservice.model.PortfolioDto;
-import com.example.portfolioservice.model.UserDto;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.example.portfolioservice.mapper.PortfolioMapper;
+import com.example.portfolioservice.model.PortfolioDto;
 
 @Service
 public class PortfolioServiceImpl implements PortfolioService{
@@ -31,6 +30,13 @@ public class PortfolioServiceImpl implements PortfolioService{
     public PortfolioDto findByPortfolioId(long portfolio_id) {
         return null;
     }
+    
+    
+    
+    public List<PortfolioDto> createPortfolio(){
+    	return sqlsession.getMapper(PortfolioMapper.class).createPortfolio();
+    }
+
 
 
 }
