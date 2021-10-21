@@ -7,18 +7,13 @@ import com.example.portfolioservice.model.PortfolioDto;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import com.example.portfolioservice.model.HoldingsDto;
 
 @Service
 public class PortfolioServiceImpl implements PortfolioService{
 
     @Autowired
     SqlSession sqlsession;
-
-    @Override
-    public List<PortfolioDto> findAll() {
-        return sqlsession.getMapper(PortfolioMapper.class).findAll();
-    }
 
     @Override
     public long deleteByUserId(long user_id) {
@@ -33,6 +28,13 @@ public class PortfolioServiceImpl implements PortfolioService{
     @Override
     public PortfolioDto findByPortfolioId(long portfolio_id) {
         return null;
+    }
+    public void createPortfolio(){
+    	sqlsession.getMapper(PortfolioMapper.class).createPortfolio();
+    }
+    
+    public List<HoldingsDto> getAsset() {
+    	return sqlsession.getMapper(PortfolioMapper.class).getAsset();
     }
 
 
