@@ -17,6 +17,9 @@ local.properties
 .idea/
 portfolio-service.iml
 
+.idea/
+portfolio-service.iml
+
 # External tool builders
 .externalToolBuilders/
 
