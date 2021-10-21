@@ -8,12 +8,20 @@ spec:
   tls:
   - secretName: tls-secret
   rules:
-  - http:
-      paths:
-      - path: /portfolio-service
-        pathType: Prefix
-        backend:
-          service:
-            name: portfolio-service
-            port:
-              number: 8001
+    - host: paldo.169.56.174.130.nip.io
+    - http:
+        paths:
+          - path: /moneymany
+            pathType: Prefix
+            backend:
+              service:
+                name: paldo-fe
+                port:
+                  number: 8000
+          - path: /portfolio-service
+            pathType: Prefix
+            backend:
+              service:
+                name: portfolio-service
+                port:
+                  number: 8001
