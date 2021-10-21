@@ -24,6 +24,7 @@ public class SwaggerConfig {
 	                .paths(PathSelectors.any())
 	                .build()
 	                .apiInfo(apiInfo());
+
 	    }
 
 	    private ApiInfo apiInfo() {
@@ -32,5 +33,6 @@ public class SwaggerConfig {
 	                .description("portfolio swagger config")
 	                .version("1.0")
 	                .build();
+	        
 	    }
 }
