@@ -68,6 +68,7 @@ target/
 .project
 .DS_Store
 .classpath
+.DS_Store*
 
 ### Eclipse Patch ###
 # Spring Boot Tooling
