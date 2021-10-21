@@ -1,8 +1,9 @@
 package com.example.portfolioservice.service;
 
-import com.example.portfolioservice.model.PortfolioDto;
-
 import java.util.List;
+
+import com.example.portfolioservice.model.PortfolioDto;
+import com.example.portfolioservice.model.HoldingsDto;
 
 public interface PortfolioService {
 
@@ -15,6 +16,11 @@ public interface PortfolioService {
     // 포트폴리오 전체 조회
     public List<PortfolioDto> findAll();
     // 포트폴리오 생성  
-    public List<PortfolioDto> createPortfolio();
+    public void createPortfolio();
+    
+    
+    // 자산조회   
+    public List<HoldingsDto> getAsset();
+    
 
 }

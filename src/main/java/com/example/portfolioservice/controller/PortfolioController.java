@@ -40,14 +40,17 @@ public class PortfolioController {
     
     
     // 포트폴리오 생성 
-    @GetMapping(value = "/portfolios")
-    public EntityModel<List<PortfolioDto>> getPortfolios() {
-        EntityModel<List<PortfolioDto>> entityModel = EntityModel.of(portfolioService.findAll());
-        WebMvcLinkBuilder linkBuilder = WebMvcLinkBuilder.linkTo(WebMvcLinkBuilder.methodOn(this.getClass()).getPortfolios());
-        entityModel.add(linkBuilder.withRel("test"));
-        return entityModel;
+    @PostMapping(value = "/{userId}/portfolio")
+    public void createPortfolios() {
+    	
+    	//TODO 파라메터 넘겨준거 자바에 담기 - 시은 
+        portfolioService.createPortfolio();
     }
     
-    
+    // 자산 조회 
+    @GetMapping(value = "/{userId}/asset")
+    public void getAsset(){
+        portfolioService.getAsset();
+    }
     
 }
