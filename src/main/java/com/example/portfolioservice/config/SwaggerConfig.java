@@ -2,10 +2,7 @@ package com.example.portfolioservice.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-<<<<<<< HEAD
 
-=======
->>>>>>> f084a58fc645d19eb57b9a0738078117d68b5d4f
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -17,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @Configuration
 public class SwaggerConfig {
-<<<<<<< HEAD
+
 	 @Bean
 	    public Docket api() {
 	        return new Docket(DocumentationType.OAS_30)
@@ -36,25 +33,4 @@ public class SwaggerConfig {
 	                .version("1.0")
 	                .build();
 	    }
-=======
-    @Bean
-    public Docket api() {
-        return new Docket(DocumentationType.OAS_30)
-                .useDefaultResponseMessages(false)
-                .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.portfolioservice.config"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(apiInfo());
-    }
-
-    private ApiInfo apiInfo() {
-        return new ApiInfoBuilder()
-                .title( "Portfolio Swagger")
-                .description("portfolio swagger config")
-                .version("1.0")
-                .build();
-    }
->>>>>>> f084a58fc645d19eb57b9a0738078117d68b5d4f
-
 }
