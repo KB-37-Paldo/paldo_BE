@@ -2,14 +2,22 @@ package com.example.portfolioservice.service;
 
 
 import java.util.List;
+<<<<<<< HEAD
 
+=======
+import com.example.portfolioservice.mapper.PortfolioMapper;
+import com.example.portfolioservice.model.PortfolioDto;
+>>>>>>> 7566b6ebbce4a86f628df008c7fe793ed3157e31
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
 import com.example.portfolioservice.mapper.PortfolioMapper;
 import com.example.portfolioservice.model.HoldingsDto;
 import com.example.portfolioservice.model.PortfolioDto;
+=======
+>>>>>>> 7566b6ebbce4a86f628df008c7fe793ed3157e31
 
 @Service
 public class PortfolioServiceImpl implements PortfolioService{
@@ -31,6 +39,7 @@ public class PortfolioServiceImpl implements PortfolioService{
     public PortfolioDto findByPortfolioId(long portfolio_id) {
         return null;
     }
+<<<<<<< HEAD
     
     
     
@@ -43,6 +52,8 @@ public class PortfolioServiceImpl implements PortfolioService{
     	return sqlsession.getMapper(PortfolioMapper.class).getAsset();
     }
     
+=======
+>>>>>>> 7566b6ebbce4a86f628df008c7fe793ed3157e31
 
 
 }

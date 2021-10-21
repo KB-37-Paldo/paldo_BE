@@ -38,6 +38,7 @@ public class PortfolioController {
         return entityModel;
     }
     
+<<<<<<< HEAD
     
     // 포트폴리오 생성 
     @PostMapping(value = "/{userId}/portfolio")
@@ -53,4 +54,6 @@ public class PortfolioController {
         portfolioService.getAsset();
     }
     
+=======
+>>>>>>> 7566b6ebbce4a86f628df008c7fe793ed3157e31
 }
