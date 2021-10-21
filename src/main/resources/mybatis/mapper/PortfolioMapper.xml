@@ -13,7 +13,6 @@
         <result property="user_id" column="user_id"/>
         <collection property="details" column="portfolio_id" javaType="java.util.ArrayList" ofType="PortfolioDetailDto">
             <id property="portfolio_detail_id" column="portfolio_detail_id"/>
-<!--            <result property="portfolio_detail_id" column="portfolio_detail_id"/>-->
             <result property="percentage" column="percentage"/>
             <result property="type" column="type"/>
         </collection>
@@ -22,10 +21,10 @@
     <select id="findByUserId" parameterType="long" resultMap="portfolioResult">
         SELECT *
         FROM PORTFOLIO p LEFT OUTER JOIN
-            (SELECT pd.PORTFOLIO_DETAIL_ID as portfolio_detail_id, pd.PORTFOLIO_ID as portfolio_id, pd.PERCENTAGE as percentage, at2.`TYPE`
+            (SELECT pd.portfolio_detail_id as portfolio_detail_id, pd.portfolio_id as portfolio_id, pd.percentage as percentage, at2.`type`
             FROM PORTFOLIO_DETAIL pd JOIN ASSET_TYPE at2
-            ON pd.ASSET_TYPE_ID = at2.ASSET_TYPE_ID ) pd
-        ON (p.portfolio_id = pd.PORTFOLIO_ID)
+            ON pd.asset_type_id = at2.asset_type_id ) pd
+        ON (p.portfolio_id = pd.portfolio_id)
         WHERE user_id = #{user_id}
             AND p.portfolio_id = pd.portfolio_id
     </select>
@@ -35,12 +34,9 @@
         FROM PORTFOLIO
     </select>
 
-	
-	
-	<insert id="createPortfolio" parameterType="PortfolioDto" >
-        SELECT *
-        FROM PORTFOLIO
-    </insert>
-	
-	
+	<delete id="deleteByUserId" parameterType="long">
+        DELETE FROM PORTFOLIO
+        WHERE PORTFOLIO.user_id = #{user_id}
+    </delete>
+    
 </mapper>

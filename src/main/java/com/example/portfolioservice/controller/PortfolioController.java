@@ -37,5 +37,12 @@ public class PortfolioController {
         entityModel.add(linkBuilder.withRel("test"));
         return entityModel;
     }
+
+    // 포트폴리오 삭제
+    @DeleteMapping(value = "/{id}/portfolio")
+    public ResponseEntity<Long> deletePortfolio(@PathVariable("id") long user_id) {
+        return ResponseEntity.ok().body(portfolioService.deleteByUserId(user_id));
+    }
+
     
 }

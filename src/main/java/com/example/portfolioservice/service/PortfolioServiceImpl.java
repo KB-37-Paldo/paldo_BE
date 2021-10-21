@@ -21,6 +21,11 @@ public class PortfolioServiceImpl implements PortfolioService{
     }
 
     @Override
+    public long deleteByUserId(long user_id) {
+        return sqlsession.getMapper(PortfolioMapper.class).deleteByUserId(user_id);
+    }
+
+    @Override
     public PortfolioDto findByUserId(long user_id) {
         return sqlsession.getMapper(PortfolioMapper.class).findByUserId(user_id);
     }
