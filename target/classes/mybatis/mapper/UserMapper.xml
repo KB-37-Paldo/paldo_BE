@@ -4,6 +4,6 @@
 
 <mapper namespace="com.example.portfolioservice.mapper.UserMapper">
     <select id="findAll" resultType="UserDto">
-        SELECT * FROM user;
+        SELECT * FROM USER;
     </select>
 </mapper>

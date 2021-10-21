@@ -18,8 +18,8 @@ public class PortfolioServiceImpl implements PortfolioService{
     SqlSession sqlsession;
 
     @Override
-    public List<UserDto> findAll() {
-        return sqlsession.getMapper(UserMapper.class).findAll();
+    public List<PortfolioDto> findAll() {
+        return sqlsession.getMapper(PortfolioMapper.class).findAll();
     }
 
     @Override
@@ -30,11 +30,6 @@ public class PortfolioServiceImpl implements PortfolioService{
     @Override
     public PortfolioDto findByPortfolioId(long portfolio_id) {
         return null;
-    }
-
-    @Override
-    public List<PortfolioDto> findPortfolioAll() {
-        return sqlsession.getMapper(PortfolioMapper.class).findAll();
     }
 
 

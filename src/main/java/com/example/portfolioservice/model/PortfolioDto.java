@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -16,4 +17,5 @@ public class PortfolioDto {
     private Date target_period;
     private Date create_at;
     private long user_id;
+    private List<PortfolioDetailDto> details;
 }

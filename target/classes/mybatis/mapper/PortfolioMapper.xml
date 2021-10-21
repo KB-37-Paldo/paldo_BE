@@ -3,14 +3,37 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.portfolioservice.mapper.PortfolioMapper">
-    <select id="findByUserId" parameterType="long" resultType="PortfolioDto">
+
+    <resultMap id="portfolioResult" type="PortfolioDto">
+        <id property="portfolio_id" column="portfolio_id"/>
+        <result property="invest_type" column="invest_type"/>
+        <result property="target_price" column="target_price"/>
+        <result property="create_at" column="create_at"/>
+        <result property="target_period" column="target_period"/>
+        <result property="user_id" column="user_id"/>
+        <collection property="details" column="portfolio_id" javaType="java.util.ArrayList" ofType="PortfolioDetailDto">
+            <id property="portfolio_detail_id" column="portfolio_detail_id"/>
+<!--            <result property="portfolio_detail_id" column="portfolio_detail_id"/>-->
+            <result property="percentage" column="percentage"/>
+            <result property="type" column="type"/>
+        </collection>
+    </resultMap>
+
+    <select id="findByUserId" parameterType="long" resultMap="portfolioResult">
         SELECT *
-        FROM portfolio
+        FROM PORTFOLIO p LEFT OUTER JOIN
+            (SELECT pd.PORTFOLIO_DETAIL_ID as portfolio_detail_id, pd.PORTFOLIO_ID as portfolio_id, pd.PERCENTAGE as percentage, at2.`TYPE`
+            FROM PORTFOLIO_DETAIL pd JOIN ASSET_TYPE at2
+            ON pd.ASSET_TYPE_ID = at2.ASSET_TYPE_ID ) pd
+        ON (p.portfolio_id = pd.PORTFOLIO_ID)
         WHERE user_id = #{user_id}
+            AND p.portfolio_id = pd.portfolio_id
     </select>
+
     <select id="findAll" resultType="PortfolioDto">
         SELECT *
-        FROM portfolio
+        FROM PORTFOLIO
     </select>
+
 
 </mapper>
