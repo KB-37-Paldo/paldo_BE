@@ -10,7 +10,7 @@ spec:
     - secretName: tls-secret
   rules:
     - host: paldo.169.56.174.130.nip.io
-    - http:
+      http:
         paths:
           - path: /moneymany
             pathType: Prefix
