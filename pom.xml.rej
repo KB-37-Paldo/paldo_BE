@@ -1,0 +1,19 @@
+diff a/pom.xml b/pom.xml	(rejected hunks)
+@@ -67,17 +67,6 @@
+             <scope>test</scope>
+         </dependency>
+ 
+-        <!-- Swagger dependency -->
+-        <dependency>
+-            <groupId>io.springfox</groupId>
+-            <artifactId>springfox-swagger2</artifactId>
+-            <version>2.9.2</version>
+-        </dependency>
+-        <dependency>
+-            <groupId>io.springfox</groupId>
+-            <artifactId>springfox-swagger-ui</artifactId>
+-            <version>2.9.2</version>
+-        </dependency>
+     </dependencies>
+ 
+     <build>

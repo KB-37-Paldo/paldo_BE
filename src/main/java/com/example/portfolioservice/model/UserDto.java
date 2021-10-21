@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class UserDto {
-    private Long id;
+    private Long user_id;
     private String name;
     private int age;
     private Long salary;
