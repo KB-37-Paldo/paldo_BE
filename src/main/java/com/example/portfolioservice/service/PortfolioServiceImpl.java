@@ -1,8 +1,13 @@
 package com.example.portfolioservice.service;
 
 
+<<<<<<< HEAD
 import java.util.List;
 
+=======
+import com.example.portfolioservice.mapper.PortfolioMapper;
+import com.example.portfolioservice.model.PortfolioDto;
+>>>>>>> 321e43cc40e5eadfe1f473da1b0d3aa8a9b1d84a
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
