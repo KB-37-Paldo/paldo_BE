@@ -3,7 +3,21 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.portfolioservice.mapper.PortfolioMapper">
+    <resultMap id="portfolioResult" type="PortfolioDto">
+        <id property="portfolio_id" column="portfolio_id"/>
+        <result property="invest_type" column="invest_type"/>
+        <result property="target_price" column="target_price"/>
+        <result property="create_at" column="create_at"/>
+        <result property="target_period" column="target_period"/>
+        <result property="user_id" column="user_id"/>
+        <collection property="details" column="portfolio_id" javaType="java.util.ArrayList" ofType="PortfolioDetailDto">
+            <id property="portfolio_detail_id" column="portfolio_detail_id"/>
+            <result property="percentage" column="percentage"/>
+            <result property="type" column="type"/>
+        </collection>
+    </resultMap>
 
+<<<<<<< HEAD
 	<resultMap id="portfolioResult" type="PortfolioDto">
 		<id property="portfolio_id" column="portfolio_id" />
 		<result property="invest_type" column="invest_type" />
@@ -44,6 +58,18 @@
 		SELECT *
 		FROM PORTFOLIO
 	</select>
+=======
+    <select id="findByUserId" parameterType="long" resultMap="portfolioResult">
+        SELECT *
+        FROM PORTFOLIO p LEFT OUTER JOIN
+            (SELECT pd.portfolio_detail_id as portfolio_detail_id, pd.portfolio_id as portfolio_id, pd.percentage as percentage, at2.`type`
+            FROM PORTFOLIO_DETAIL pd JOIN ASSET_TYPE at2
+            ON pd.asset_type_id = at2.asset_type_id ) pd
+        ON (p.portfolio_id = pd.portfolio_id)
+        WHERE user_id = #{user_id}
+            AND p.portfolio_id = pd.portfolio_id
+    </select>
+>>>>>>> c95ad8671844219dd7c436554cc0409167d25901
 
 	<insert id="createPortfolio" parameterType="PortfolioDto">
 		<selectKey resultType="string" keyProperty="portfolio_id" order="BEFORE">
@@ -54,6 +80,10 @@
 		VALUES(#{portfolio_id}, #{user_id}, #{invest_type}, #{target_price}, #{target_period}, #{create_at});
 	</insert>
 
+	<delete id="deleteByUserId" parameterType="long">
+        DELETE FROM PORTFOLIO
+        WHERE PORTFOLIO.user_id = #{user_id}
+    </delete>
 
 	<select id="getAsset" resultMap="assetResult" >
 		SELECT U.USER_ID,  U.AGE , U.NAME  ,U.SALARY  

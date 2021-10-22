@@ -1,20 +1,15 @@
 package com.example.portfolioservice.mapper;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Mapper;
-
 import com.example.portfolioservice.model.HoldingsDto;
 import com.example.portfolioservice.model.PortfolioDto;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
 
 @Mapper
 public interface PortfolioMapper {
     PortfolioDto findByUserId(long user_id);
-    List<PortfolioDto> findAll();
-    
+    long deleteByUserId(long user_id);
     void createPortfolio();
-    
-    // 자산조회   
     List<HoldingsDto> getAsset();
-    
 }
