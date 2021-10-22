@@ -1,6 +1,7 @@
 package com.example.portfolioservice.controller;
 
 import com.example.portfolioservice.model.PortfolioDto;
+import com.example.portfolioservice.model.PortfolioResponseDto;
 import com.example.portfolioservice.service.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
@@ -18,11 +19,10 @@ public class PortfolioController {
 
     // 포트폴리오 조회
     @GetMapping(value = "/portfolio/{id}")
-    public ResponseEntity<EntityModel<PortfolioDto>> getUserPortfolio(@PathVariable("id") long user_id) {
-        PortfolioDto portfolio = portfolioService.findByUserId(user_id);
+    public ResponseEntity<EntityModel<PortfolioResponseDto>> getUserPortfolio(@PathVariable("id") long user_id) {
+        PortfolioResponseDto portfolio = portfolioService.findByUserId(user_id);
 
-        return ResponseEntity.ok().body(
-                EntityModel.of(portfolio)
+        return ResponseEntity.ok().body(EntityModel.of(portfolio)
                     .add(linkTo(methodOn(PortfolioController.class).getUserPortfolio(user_id)).withSelfRel())
         );
     }

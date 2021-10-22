@@ -4,11 +4,12 @@ import java.util.List;
 
 import com.example.portfolioservice.model.PortfolioDto;
 import com.example.portfolioservice.model.HoldingsDto;
+import com.example.portfolioservice.model.PortfolioResponseDto;
 
 public interface PortfolioService {
 
     // 유저의 포트폴리오 조회
-    PortfolioDto findByUserId(long user_id);
+    PortfolioResponseDto findByUserId(long user_id);
 
     // 포트폴리오 조회
     PortfolioDto findByPortfolioId(long portfolio_id);
