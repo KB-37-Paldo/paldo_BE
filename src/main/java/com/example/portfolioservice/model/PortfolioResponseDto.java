@@ -13,12 +13,12 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class PortfolioResponseDto {
-    private long portfolio_id;
-    private int invest_type;
-    private long target_price;
-    private Date target_period;
-    private Date create_at;
-    private long user_id;
+    private long portfolioId;
+    private int investType;
+    private long targetPrice;
+    private Date targetPeriod;
+    private Date createAt;
+    private long userId;
     private int cashAmount;
     private int stockAmount;
     private int goldAmount;
@@ -27,12 +27,12 @@ public class PortfolioResponseDto {
     private int realEstateAmount;
 
     public PortfolioResponseDto(PortfolioDto portfolioDto) {
-        this.portfolio_id = portfolioDto.getPortfolio_id();
-        this.invest_type = portfolioDto.getInvest_type();
-        this.target_price = portfolioDto.getTarget_price();
-        this.target_period = portfolioDto.getTarget_period();
-        this.create_at = portfolioDto.getCreate_at();
-        this.user_id = portfolioDto.getUser_id();
+        this.portfolioId = portfolioDto.getPortfolioId();
+        this.investType = portfolioDto.getInvestType();
+        this.targetPrice = portfolioDto.getTargetPrice();
+        this.targetPeriod = portfolioDto.getTargetPeriod();
+        this.createAt = portfolioDto.getCreateAt();
+        this.userId = portfolioDto.getUserId();
         this.setAmount(portfolioDto.getDetails());
     }
 

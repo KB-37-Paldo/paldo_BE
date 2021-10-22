@@ -47,9 +47,9 @@ public class PortfolioController {
 
     // 포트폴리오 수정
     @PutMapping(value = "/{userId}/portfolio")
-    public ResponseEntity<Long> putPortfolio(@PathVariable("id") long user_id,
+    public ResponseEntity<Long> putPortfolio(@PathVariable("userId") long userId,
                                              @RequestBody @Valid PortfolioForm portfolioForm) {
-        portfolioForm.setUser_id(user_id);
+        portfolioForm.setUserId(userId);
         portfolioService.updatePortfolio(portfolioForm);
         return ResponseEntity.ok().build();
     }

@@ -4,27 +4,26 @@
 
 <mapper namespace="com.example.portfolioservice.mapper.PortfolioMapper">
     <resultMap id="portfolioResult" type="PortfolioDto">
-        <id property="portfolio_id" column="portfolio_id"/>
-        <result property="invest_type" column="invest_type"/>
-        <result property="target_price" column="target_price"/>
-        <result property="create_at" column="create_at"/>
-        <result property="target_period" column="target_period"/>
-        <result property="user_id" column="user_id"/>
+        <id property="portfolioId" column="portfolio_id"/>
+        <result property="investType" column="invest_type"/>
+        <result property="targetPrice" column="target_price"/>
+        <result property="createAt" column="create_at"/>
+        <result property="targetPeriod" column="target_period"/>
+        <result property="userId" column="user_id"/>
         <collection property="details" column="portfolio_id" javaType="java.util.ArrayList" ofType="PortfolioDetailDto">
-            <id property="portfolio_detail_id" column="portfolio_detail_id"/>
+            <id property="portfolioDetailId" column="portfolio_detail_id"/>
             <result property="percentage" column="percentage"/>
             <result property="type" column="type"/>
         </collection>
     </resultMap>
 
 	<resultMap id="assetResult" type="UserDto">
-	    <result property="user_id" column="'USER_ID" />
+	    <result property="userId" column="'USER_ID" />
 	    <result property="age" column="AGE" />
 	    <result property="name" column="NAME" />
 	    <result property="salary" column="SALARY" />
 	    <result property="amount" column="AMOUNT" />
 	    <result property="assetType" column="ASSET_TYPE" />
-	  
 	</resultMap>
 
     <select id="findByUserId" parameterType="long" resultMap="portfolioResult">
@@ -62,7 +61,7 @@
 
     <update id="updatePortfolio" parameterType="com.example.portfolioservice.form.PortfolioForm">
         UPDATE PORTFOLIO
-        SET target_price=#{target_price}, target_period=#{target_period}
-        WHERE user_id = #{user_id}
+        SET target_price=#{targetPrice}, target_period=#{targetPeriod}
+        WHERE user_id = #{userId}
     </update>
 </mapper>

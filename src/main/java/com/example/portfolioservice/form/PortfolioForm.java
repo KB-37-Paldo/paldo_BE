@@ -1,23 +1,27 @@
 package com.example.portfolioservice.form;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class PortfolioForm {
 
-    private long user_id;
+    private long userId;
 
-    @Min(0) @NotBlank
-    private long target_price;
+    @Min(0)
+    private long targetPrice;
 
-    @NotBlank
-    private Date target_period;
+    @DateTimeFormat(pattern = "yyyyMMdd")
+    private Date targetPeriod;
 
     @Min(0)
     private int cashAmount;

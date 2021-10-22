@@ -24,5 +24,6 @@ public interface PortfolioService {
     // 자산조회   
     public List<HoldingsDto> getAsset();
 
+    // 포트폴리오 수정
     long updatePortfolio(PortfolioForm portfolioForm);
 }

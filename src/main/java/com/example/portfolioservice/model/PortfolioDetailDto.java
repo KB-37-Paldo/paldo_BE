@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PortfolioDetailDto {
-    private long portfolio_detail_id;
+    private long portfolioDetailId;
     private int percentage;
     private String type;
 }
