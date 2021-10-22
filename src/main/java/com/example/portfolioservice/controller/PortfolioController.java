@@ -23,7 +23,9 @@ public class PortfolioController {
         PortfolioResponseDto portfolio = portfolioService.findByUserId(user_id);
 
         return ResponseEntity.ok().body(EntityModel.of(portfolio)
-                    .add(linkTo(methodOn(PortfolioController.class).getUserPortfolio(user_id)).withSelfRel())
+                .add(linkTo(methodOn(PortfolioController.class).getUserPortfolio(user_id)).withSelfRel())
+                .add(linkTo(methodOn(PortfolioController.class).getUserPortfolio(user_id)).withRel("portfolioUpdate"))
+                .add(linkTo(methodOn(PortfolioController.class).deletePortfolio(user_id)).withRel("portfolioDelete"))
         );
     }
 
