@@ -1,24 +1,16 @@
 package com.example.portfolioservice.service;
 
 
+import com.example.portfolioservice.form.PortfolioForm;
+import com.example.portfolioservice.mapper.PortfolioMapper;
+import com.example.portfolioservice.model.HoldingsDto;
+import com.example.portfolioservice.model.PortfolioDto;
+import com.example.portfolioservice.model.PortfolioResponseDto;
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
-<<<<<<< HEAD
-
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.example.portfolioservice.mapper.PortfolioMapper;
-import com.example.portfolioservice.model.HoldingsDto;
-import com.example.portfolioservice.model.PortfolioDto;
-=======
-import com.example.portfolioservice.mapper.PortfolioMapper;
-import com.example.portfolioservice.model.PortfolioDto;
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import com.example.portfolioservice.model.HoldingsDto;
->>>>>>> c95ad8671844219dd7c436554cc0409167d25901
 
 @Service
 public class PortfolioServiceImpl implements PortfolioService{
@@ -32,33 +24,29 @@ public class PortfolioServiceImpl implements PortfolioService{
     }
 
     @Override
-    public PortfolioDto findByUserId(long user_id) {
-        return sqlsession.getMapper(PortfolioMapper.class).findByUserId(user_id);
+    public PortfolioResponseDto findByUserId(long user_id) {
+        PortfolioDto portfolio = sqlsession.getMapper(PortfolioMapper.class).findByUserId(user_id);
+        PortfolioResponseDto portfolioResponseDto = new PortfolioResponseDto(portfolio);
+        return portfolioResponseDto;
     }
 
     @Override
     public PortfolioDto findByPortfolioId(long portfolio_id) {
         return null;
     }
-<<<<<<< HEAD
 
-    
-    
-    
-=======
->>>>>>> c95ad8671844219dd7c436554cc0409167d25901
+    @Override
     public void createPortfolio(){
     	sqlsession.getMapper(PortfolioMapper.class).createPortfolio();
     }
-    
+
+    @Override
     public List<HoldingsDto> getAsset() {
     	return sqlsession.getMapper(PortfolioMapper.class).getAsset();
     }
-<<<<<<< HEAD
-    
-
-=======
->>>>>>> c95ad8671844219dd7c436554cc0409167d25901
-
+    @Override
+    public long updatePortfolio(PortfolioForm portfolioForm) {
+        return sqlsession.getMapper(PortfolioMapper.class).updatePortfolio(portfolioForm);
+    }
 
 }
