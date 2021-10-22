@@ -17,7 +17,7 @@ public class PortfolioController {
     PortfolioService portfolioService;
 
     // 포트폴리오 조회
-    @GetMapping(value = "/{id}/portfolio")
+    @GetMapping(value = "/portfolio/{id}")
     public ResponseEntity<EntityModel<PortfolioDto>> getUserPortfolio(@PathVariable("id") long user_id) {
         PortfolioDto portfolio = portfolioService.findByUserId(user_id);
 
@@ -40,6 +40,14 @@ public class PortfolioController {
     	//TODO 파라메터 넘겨준거 자바에 담기 - 시은 
         portfolioService.createPortfolio();
     }
+
+    // 포트폴리오 수정
+//    @PutMapping(value = "/{userId}/portfolio")
+//    public EntityModel<PortfolioDto> putPortfolio(@PathVariable("id") long user_id) {
+//        PortfolioDto portfolio = portfolioService.findByUserId(user_id);
+//
+//        return ResponseEntity.ok().build();
+//    }
     
     // 자산 조회 
     @GetMapping(value = "/{userId}/asset")
