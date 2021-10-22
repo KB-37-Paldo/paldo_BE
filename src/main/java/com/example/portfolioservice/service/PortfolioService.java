@@ -16,15 +16,11 @@ public interface PortfolioService {
     // 포트폴리오 전체 조회
     public List<PortfolioDto> findAll();
     // 포트폴리오 생성  
-<<<<<<< HEAD
     public void createPortfolio();
     
     
     // 자산조회   
     public List<HoldingsDto> getAsset();
     
-=======
-//    public List<PortfolioDto> createPortfolio();
->>>>>>> 7566b6ebbce4a86f628df008c7fe793ed3157e31
 
 }

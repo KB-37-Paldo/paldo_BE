@@ -19,6 +19,15 @@
 		</collection>
 	</resultMap>
 
+	<resultMap id="assetResult" type="UserDto">
+	    <result property="user_id" column="'USER_ID" />
+	    <result property="age" column="AGE" />
+	    <result property="name" column="NAME" />
+	    <result property="salary" column="SALARY" />
+	    <result property="amount" column="AMOUNT" />
+	    <result property="assetType" column="ASSET_TYPE" />
+	  
+	</resultMap>
 	<select id="findByUserId" parameterType="long" resultMap="portfolioResult">
 		SELECT *
 		FROM PORTFOLIO p LEFT OUTER JOIN
@@ -46,4 +55,11 @@
 	</insert>
 
 
+	<select id="getAsset" resultMap="assetResult" >
+		SELECT U.USER_ID,  U.AGE , U.NAME  ,U.SALARY  
+			,A.AMOUNT , B.TYPE as ASSET_TYPE
+		FROM USER U left outer join HOLDINGS A on U.user_id = A.user_id 
+			, ASSET_TYPE B
+		WHERE A.asset_type_id  = B.asset_type_id	
+	</select>
 </mapper>
