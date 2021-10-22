@@ -9,7 +9,6 @@ import java.util.List;
 @Mapper
 public interface PortfolioMapper {
     PortfolioDto findByUserId(long user_id);
-    List<PortfolioDto> createPortfolio();
     long deleteByUserId(long user_id);
     void createPortfolio();
     List<HoldingsDto> getAsset();
