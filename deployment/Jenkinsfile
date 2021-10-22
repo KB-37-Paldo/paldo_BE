@@ -110,6 +110,7 @@ podTemplate(
 				container("docker") {
 					docker.withRegistry("${dockerRegistry}", "${credential_registry}") {
 						sh "docker build -f ./deployment/Dockerfile -t ${image}:${tag} ."
+						sh "docker build -f ./deployment/Dockerfile -t ${image}:dev ."
 						sh "docker push ${image}:${tag}"
 						sh "docker tag ${image}:${tag} ${image}:dev"
 						sh "docker push ${image}:dev"
