@@ -3,6 +3,8 @@ package com.example.portfolioservice.controller;
 import com.example.portfolioservice.form.PortfolioForm;
 import com.example.portfolioservice.model.PortfolioResponseDto;
 import com.example.portfolioservice.service.PortfolioService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
@@ -13,21 +15,23 @@ import javax.validation.Valid;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+
+@Api(value = "Portfolio Service")
 @RestController
 public class PortfolioController {
 
     @Autowired
     PortfolioService portfolioService;
 
-    // 포트폴리오 조회
-    @GetMapping(value = "/portfolio/{id}")
-    public ResponseEntity<EntityModel<PortfolioResponseDto>> getUserPortfolio(@PathVariable("id") long user_id) {
-        PortfolioResponseDto portfolio = portfolioService.findByUserId(user_id);
+    @ApiOperation(value = "포트폴리오 조회", notes = "특정 유저의 포트폴리오 정보를 반환")
+    @GetMapping(value = "/portfolio/{userId}")
+    public ResponseEntity<EntityModel<PortfolioResponseDto>> getUserPortfolio(@PathVariable("userId") long userId) {
+        PortfolioResponseDto portfolio = portfolioService.findByUserId(userId);
 
         return ResponseEntity.ok().body(EntityModel.of(portfolio)
-                .add(linkTo(methodOn(PortfolioController.class).getUserPortfolio(user_id)).withSelfRel())
-                .add(linkTo(methodOn(PortfolioController.class).getUserPortfolio(user_id)).withRel("portfolioUpdate"))
-                .add(linkTo(methodOn(PortfolioController.class).deletePortfolio(user_id)).withRel("portfolioDelete"))
+                .add(linkTo(methodOn(PortfolioController.class).getUserPortfolio(userId)).withSelfRel())
+                .add(linkTo(methodOn(PortfolioController.class).getUserPortfolio(userId)).withRel("portfolioUpdate"))
+                .add(linkTo(methodOn(PortfolioController.class).deletePortfolio(userId)).withRel("portfolioDelete"))
         );
     }
 
