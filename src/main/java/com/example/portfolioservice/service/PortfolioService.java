@@ -2,6 +2,7 @@ package com.example.portfolioservice.service;
 
 import java.util.List;
 
+import com.example.portfolioservice.form.PortfolioForm;
 import com.example.portfolioservice.model.PortfolioDto;
 import com.example.portfolioservice.model.HoldingsDto;
 import com.example.portfolioservice.model.PortfolioResponseDto;
@@ -23,4 +24,5 @@ public interface PortfolioService {
     // 자산조회   
     public List<HoldingsDto> getAsset();
 
+    long updatePortfolio(PortfolioForm portfolioForm);
 }

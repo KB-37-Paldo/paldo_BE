@@ -1,12 +1,14 @@
 package com.example.portfolioservice.controller;
 
-import com.example.portfolioservice.model.PortfolioDto;
+import com.example.portfolioservice.form.PortfolioForm;
 import com.example.portfolioservice.model.PortfolioResponseDto;
 import com.example.portfolioservice.service.PortfolioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -44,12 +46,13 @@ public class PortfolioController {
     }
 
     // 포트폴리오 수정
-//    @PutMapping(value = "/{userId}/portfolio")
-//    public EntityModel<PortfolioDto> putPortfolio(@PathVariable("id") long user_id) {
-//        PortfolioDto portfolio = portfolioService.findByUserId(user_id);
-//
-//        return ResponseEntity.ok().build();
-//    }
+    @PutMapping(value = "/{userId}/portfolio")
+    public ResponseEntity<Long> putPortfolio(@PathVariable("id") long user_id,
+                                             @RequestBody @Valid PortfolioForm portfolioForm) {
+        portfolioForm.setUser_id(user_id);
+        portfolioService.updatePortfolio(portfolioForm);
+        return ResponseEntity.ok().build();
+    }
     
     // 자산 조회 
     @GetMapping(value = "/{userId}/asset")

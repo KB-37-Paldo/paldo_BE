@@ -42,4 +42,10 @@
         WHERE PORTFOLIO.user_id = #{user_id}
     </delete>
 
+    <update id="updatePortfolio" parameterType="com.example.portfolioservice.form.PortfolioForm">
+        UPDATE PORTFOLIO
+        SET target_price=#{target_price}, target_period=#{target_period}
+        WHERE user_id = #{user_id}
+    </update>
+
 </mapper>

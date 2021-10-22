@@ -2,6 +2,8 @@ package com.example.portfolioservice.service;
 
 
 import java.util.List;
+
+import com.example.portfolioservice.form.PortfolioForm;
 import com.example.portfolioservice.mapper.PortfolioMapper;
 import com.example.portfolioservice.model.PortfolioDto;
 import com.example.portfolioservice.model.PortfolioResponseDto;
@@ -32,13 +34,20 @@ public class PortfolioServiceImpl implements PortfolioService{
     public PortfolioDto findByPortfolioId(long portfolio_id) {
         return null;
     }
+
+    @Override
     public void createPortfolio(){
     	sqlsession.getMapper(PortfolioMapper.class).createPortfolio();
     }
-    
+
+    @Override
     public List<HoldingsDto> getAsset() {
     	return sqlsession.getMapper(PortfolioMapper.class).getAsset();
     }
 
+    @Override
+    public long updatePortfolio(PortfolioForm portfolioForm) {
+        return sqlsession.getMapper(PortfolioMapper.class).updatePortfolio(portfolioForm);
+    }
 
 }
