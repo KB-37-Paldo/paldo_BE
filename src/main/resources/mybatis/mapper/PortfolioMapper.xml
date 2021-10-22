@@ -17,22 +17,6 @@
         </collection>
     </resultMap>
 
-<<<<<<< HEAD
-	<resultMap id="portfolioResult" type="PortfolioDto">
-		<id property="portfolio_id" column="portfolio_id" />
-		<result property="invest_type" column="invest_type" />
-		<result property="target_price" column="target_price" />
-		<result property="create_at" column="create_at" />
-		<result property="target_period" column="target_period" />
-		<result property="user_id" column="user_id" />
-		<collection property="details" column="portfolio_id" javaType="java.util.ArrayList" ofType="PortfolioDetailDto">
-			<id property="portfolio_detail_id" column="portfolio_detail_id" />
-			<!-- <result property="portfolio_detail_id" column="portfolio_detail_id"/> -->
-			<result property="percentage" column="percentage" />
-			<result property="type" column="type" />
-		</collection>
-	</resultMap>
-
 	<resultMap id="assetResult" type="UserDto">
 	    <result property="user_id" column="'USER_ID" />
 	    <result property="age" column="AGE" />
@@ -42,23 +26,7 @@
 	    <result property="assetType" column="ASSET_TYPE" />
 	  
 	</resultMap>
-	<select id="findByUserId" parameterType="long" resultMap="portfolioResult">
-		SELECT *
-		FROM PORTFOLIO p LEFT OUTER JOIN
-		(SELECT pd.PORTFOLIO_DETAIL_ID as portfolio_detail_id, pd.PORTFOLIO_ID as
-		portfolio_id, pd.PERCENTAGE as percentage, at2.`TYPE`
-		FROM PORTFOLIO_DETAIL pd JOIN ASSET_TYPE at2
-		ON pd.ASSET_TYPE_ID = at2.ASSET_TYPE_ID ) pd
-		ON (p.portfolio_id = pd.PORTFOLIO_ID)
-		WHERE user_id = #{user_id}
-		AND p.portfolio_id = pd.portfolio_id
-	</select>
 
-	<select id="findAll" resultType="PortfolioDto">
-		SELECT *
-		FROM PORTFOLIO
-	</select>
-=======
     <select id="findByUserId" parameterType="long" resultMap="portfolioResult">
         SELECT *
         FROM PORTFOLIO p LEFT OUTER JOIN
@@ -69,7 +37,6 @@
         WHERE user_id = #{user_id}
             AND p.portfolio_id = pd.portfolio_id
     </select>
->>>>>>> c95ad8671844219dd7c436554cc0409167d25901
 
 	<insert id="createPortfolio" parameterType="PortfolioDto">
 		<selectKey resultType="string" keyProperty="portfolio_id" order="BEFORE">
@@ -92,4 +59,10 @@
 			, ASSET_TYPE B
 		WHERE A.asset_type_id  = B.asset_type_id	
 	</select>
+
+    <update id="updatePortfolio" parameterType="com.example.portfolioservice.form.PortfolioForm">
+        UPDATE PORTFOLIO
+        SET target_price=#{target_price}, target_period=#{target_period}
+        WHERE user_id = #{user_id}
+    </update>
 </mapper>
