@@ -1,16 +1,17 @@
 package com.example.portfolioservice.service;
 
 
-import com.example.portfolioservice.form.PortfolioForm;
+import com.example.portfolioservice.form.PortfolioCreateForm;
+import com.example.portfolioservice.form.PortfolioDetailForm;
+import com.example.portfolioservice.form.PortfolioUpdateForm;
 import com.example.portfolioservice.mapper.PortfolioMapper;
-import com.example.portfolioservice.model.HoldingsDto;
-import com.example.portfolioservice.model.PortfolioDto;
-import com.example.portfolioservice.model.PortfolioResponseDto;
+import com.example.portfolioservice.model.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PortfolioServiceImpl implements PortfolioService{
@@ -19,34 +20,46 @@ public class PortfolioServiceImpl implements PortfolioService{
     SqlSession sqlsession;
 
     @Override
-    public long deleteByUserId(long user_id) {
-        return sqlsession.getMapper(PortfolioMapper.class).deleteByUserId(user_id);
+    public long deleteByUserId(long userId) {
+        return sqlsession.getMapper(PortfolioMapper.class).deleteByUserId(userId);
     }
 
     @Override
-    public PortfolioResponseDto findByUserId(long user_id) {
-        PortfolioDto portfolio = sqlsession.getMapper(PortfolioMapper.class).findByUserId(user_id);
-        PortfolioResponseDto portfolioResponseDto = new PortfolioResponseDto(portfolio);
+    public PortfolioResponseDto findByUserId(long userId) {
+        Optional<PortfolioDto> portfolio = sqlsession.getMapper(PortfolioMapper.class).findByUserId(userId);
+        PortfolioResponseDto portfolioResponseDto = new PortfolioResponseDto(portfolio.get());
         return portfolioResponseDto;
     }
 
     @Override
-    public PortfolioDto findByPortfolioId(long portfolio_id) {
-        return null;
-    }
+    public long createPortfolio(PortfolioCreateForm portfolioCreateForm){
+        sqlsession.getMapper(PortfolioMapper.class).createPortfolio(portfolioCreateForm);
+        InvestType investType = InvestType.valueOfTitle(portfolioCreateForm.getInvestType());
+        long id = portfolioCreateForm.getPortfolioId();
+        sqlsession.getMapper(PortfolioMapper.class).createPortfolioDetail(new PortfolioDetailForm(id, AssetType.cash.getTypeId(), investType.getCash()));
+        sqlsession.getMapper(PortfolioMapper.class).createPortfolioDetail(new PortfolioDetailForm(id, AssetType.stock.getTypeId(), investType.getStock()));
+        sqlsession.getMapper(PortfolioMapper.class).createPortfolioDetail(new PortfolioDetailForm(id, AssetType.gold.getTypeId(), investType.getGold()));
+        sqlsession.getMapper(PortfolioMapper.class).createPortfolioDetail(new PortfolioDetailForm(id, AssetType.bond.getTypeId(), investType.getBond()));
+        sqlsession.getMapper(PortfolioMapper.class).createPortfolioDetail(new PortfolioDetailForm(id, AssetType.fund.getTypeId(), investType.getFund()));
+        sqlsession.getMapper(PortfolioMapper.class).createPortfolioDetail(new PortfolioDetailForm(id, AssetType.realEstate.getTypeId(), investType.getRealEstate()));
 
-    @Override
-    public void createPortfolio(){
-    	sqlsession.getMapper(PortfolioMapper.class).createPortfolio();
+        return id;
     }
 
     @Override
     public List<HoldingsDto> getAsset() {
     	return sqlsession.getMapper(PortfolioMapper.class).getAsset();
     }
+
     @Override
-    public long updatePortfolio(PortfolioForm portfolioForm) {
-        return sqlsession.getMapper(PortfolioMapper.class).updatePortfolio(portfolioForm);
+    public long updatePortfolio(PortfolioUpdateForm portfolioUpdateForm) {
+        return sqlsession.getMapper(PortfolioMapper.class).updatePortfolio(portfolioUpdateForm);
     }
+
+    @Override
+    public boolean exists(long userId) {
+        return sqlsession.getMapper(PortfolioMapper.class).exists(userId);
+    }
+
 
 }

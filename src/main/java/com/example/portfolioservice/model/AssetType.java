@@ -2,18 +2,20 @@ package com.example.portfolioservice.model;
 
 import lombok.Getter;
 
+@Getter
 public enum AssetType {
-    cash("현금성"),
-    stock("주식"),
-    gold("금"),
-    bond("체권"),
-    fund("펀드"),
-    realEstate("부동산");
+    cash(1, "현금성"),
+    stock(2, "주식"),
+    gold(3, "금"),
+    bond(4, "체권"),
+    fund(5, "펀드"),
+    realEstate(6,"부동산");
 
-    @Getter
+    private final int typeId;
     private final String title;
 
-    AssetType(String title) {
+    AssetType(int typeId, String title) {
+        this.typeId = typeId;
         this.title = title;
     }
 

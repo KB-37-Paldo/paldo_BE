@@ -33,22 +33,19 @@
             FROM PORTFOLIO_DETAIL pd JOIN ASSET_TYPE at2
             ON pd.asset_type_id = at2.asset_type_id ) pd
         ON (p.portfolio_id = pd.portfolio_id)
-        WHERE user_id = #{user_id}
+        WHERE user_id = #{userId}
             AND p.portfolio_id = pd.portfolio_id
     </select>
 
-	<insert id="createPortfolio" parameterType="PortfolioDto">
-		<selectKey resultType="string" keyProperty="portfolio_id" order="BEFORE">
-	        SELECT MAX(PORTFOLIO_ID)+1 FROM PORTFOLIO        
-	    </selectKey>		
-		INSERT INTO PORTFOLIO
-		(PORTFOLIO_ID, USER_ID, INVEST_TYPE, TARGET_PRICE, TARGET_PERIOD, CREATE_AT)
-		VALUES(#{portfolio_id}, #{user_id}, #{invest_type}, #{target_price}, #{target_period}, #{create_at});
+	<insert id="createPortfolio" parameterType="com.example.portfolioservice.form.PortfolioCreateForm"
+            useGeneratedKeys="true" keyColumn="portfolio_id" keyProperty="portfolioId">
+        INSERT INTO PORTFOLIO(invest_type, target_period, target_price, user_id)
+        VALUES(#{investType}, #{targetPeriod}, #{targetPrice}, #{userId});
 	</insert>
 
 	<delete id="deleteByUserId" parameterType="long">
         DELETE FROM PORTFOLIO
-        WHERE PORTFOLIO.user_id = #{user_id}
+        WHERE PORTFOLIO.user_id = #{userId}
     </delete>
 
 	<select id="getAsset" resultMap="assetResult" >
@@ -59,9 +56,18 @@
 		WHERE A.asset_type_id  = B.asset_type_id	
 	</select>
 
-    <update id="updatePortfolio" parameterType="com.example.portfolioservice.form.PortfolioForm">
+    <update id="updatePortfolio" parameterType="com.example.portfolioservice.form.PortfolioUpdateForm">
         UPDATE PORTFOLIO
         SET target_price=#{targetPrice}, target_period=#{targetPeriod}
         WHERE user_id = #{userId}
     </update>
+
+    <select id="exists" parameterType="long" resultType="boolean">
+        SELECT EXISTS(SELECT * FROM PORTFOLIO WHERE user_id = #{userID})
+    </select>
+
+    <insert id="createPortfolioDetail" parameterType="com.example.portfolioservice.form.PortfolioDetailForm">
+        INSERT INTO PORTFOLIO_DETAIL(portfolio_id, percentage, asset_type_id)
+        VALUES (#{portfolioId}, #{percentage}, #{typeId})
+    </insert>
 </mapper>

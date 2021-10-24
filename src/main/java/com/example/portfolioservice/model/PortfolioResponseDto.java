@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PortfolioResponseDto {
     private long portfolioId;
-    private int investType;
+    private String investType;
     private long targetPrice;
     private Date targetPeriod;
     private Date createAt;
