@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PortfolioDto {
     private long portfolio_id;
-    private int invest_type;
+    private String invest_type;
     private long target_price;
     private Date target_period;
     private Date create_at;
