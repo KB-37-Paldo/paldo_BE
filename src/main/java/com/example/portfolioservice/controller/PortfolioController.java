@@ -27,7 +27,7 @@ public class PortfolioController {
     PortfolioService portfolioService;
 
     @ApiOperation(value = "포트폴리오 조회", notes = "특정 유저의 포트폴리오 정보를 반환")
-    @GetMapping(value = "/portfolio/{userId}")
+    @GetMapping(value = "/{userId}")
     public ResponseEntity<EntityModel<PortfolioResponseDto>> getUserPortfolio(@PathVariable("userId") long userId) {
         PortfolioResponseDto portfolio = portfolioService.findByUserId(userId);
 
