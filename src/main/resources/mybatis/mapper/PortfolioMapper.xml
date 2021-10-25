@@ -4,18 +4,27 @@
 
 <mapper namespace="com.example.portfolioservice.mapper.PortfolioMapper">
     <resultMap id="portfolioResult" type="PortfolioDto">
-        <id property="portfolio_id" column="portfolio_id"/>
-        <result property="invest_type" column="invest_type"/>
-        <result property="target_price" column="target_price"/>
-        <result property="create_at" column="create_at"/>
-        <result property="target_period" column="target_period"/>
-        <result property="user_id" column="user_id"/>
+        <id property="portfolioId" column="portfolio_id"/>
+        <result property="investType" column="invest_type"/>
+        <result property="targetPrice" column="target_price"/>
+        <result property="createAt" column="create_at"/>
+        <result property="targetPeriod" column="target_period"/>
+        <result property="userId" column="user_id"/>
         <collection property="details" column="portfolio_id" javaType="java.util.ArrayList" ofType="PortfolioDetailDto">
-            <id property="portfolio_detail_id" column="portfolio_detail_id"/>
+            <id property="portfolioDetailId" column="portfolio_detail_id"/>
             <result property="percentage" column="percentage"/>
             <result property="type" column="type"/>
         </collection>
     </resultMap>
+
+	<resultMap id="assetResult" type="UserDto">
+	    <result property="userId" column="'USER_ID" />
+	    <result property="age" column="AGE" />
+	    <result property="name" column="NAME" />
+	    <result property="salary" column="SALARY" />
+	    <result property="amount" column="AMOUNT" />
+	    <result property="assetType" column="ASSET_TYPE" />
+	</resultMap>
 
     <select id="findByUserId" parameterType="long" resultMap="portfolioResult">
         SELECT *
@@ -24,22 +33,41 @@
             FROM PORTFOLIO_DETAIL pd JOIN ASSET_TYPE at2
             ON pd.asset_type_id = at2.asset_type_id ) pd
         ON (p.portfolio_id = pd.portfolio_id)
-        WHERE user_id = #{user_id}
+        WHERE user_id = #{userId}
             AND p.portfolio_id = pd.portfolio_id
     </select>
 
-	<insert id="createPortfolio" parameterType="PortfolioDto">
-		<selectKey resultType="string" keyProperty="portfolio_id" order="BEFORE">
-	        SELECT MAX(PORTFOLIO_ID)+1 FROM PORTFOLIO        
-	    </selectKey>		
-		INSERT INTO PORTFOLIO
-		(PORTFOLIO_ID, USER_ID, INVEST_TYPE, TARGET_PRICE, TARGET_PERIOD, CREATE_AT)
-		VALUES(#{portfolio_id}, #{user_id}, #{invest_type}, #{target_price}, #{target_period}, #{create_at});
+	<insert id="createPortfolio" parameterType="com.example.portfolioservice.form.PortfolioCreateForm"
+            useGeneratedKeys="true" keyColumn="portfolio_id" keyProperty="portfolioId">
+        INSERT INTO PORTFOLIO(invest_type, target_period, target_price, user_id)
+        VALUES(#{investType}, #{targetPeriod}, #{targetPrice}, #{userId});
 	</insert>
 
 	<delete id="deleteByUserId" parameterType="long">
         DELETE FROM PORTFOLIO
-        WHERE PORTFOLIO.user_id = #{user_id}
+        WHERE PORTFOLIO.user_id = #{userId}
     </delete>
 
+	<select id="getAsset" resultMap="assetResult" >
+		SELECT U.USER_ID,  U.AGE , U.NAME  ,U.SALARY  
+			,A.AMOUNT , B.TYPE as ASSET_TYPE
+		FROM USER U left outer join HOLDINGS A on U.user_id = A.user_id 
+			, ASSET_TYPE B
+		WHERE A.asset_type_id  = B.asset_type_id	
+	</select>
+
+    <update id="updatePortfolio" parameterType="com.example.portfolioservice.form.PortfolioUpdateForm">
+        UPDATE PORTFOLIO
+        SET target_price=#{targetPrice}, target_period=#{targetPeriod}
+        WHERE user_id = #{userId}
+    </update>
+
+    <select id="exists" parameterType="long" resultType="boolean">
+        SELECT EXISTS(SELECT * FROM PORTFOLIO WHERE user_id = #{userID})
+    </select>
+
+    <insert id="createPortfolioDetail" parameterType="com.example.portfolioservice.form.PortfolioDetailForm">
+        INSERT INTO PORTFOLIO_DETAIL(portfolio_id, percentage, asset_type_id)
+        VALUES (#{portfolioId}, #{percentage}, #{typeId})
+    </insert>
 </mapper>

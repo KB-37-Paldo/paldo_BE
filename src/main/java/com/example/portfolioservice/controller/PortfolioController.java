@@ -1,58 +1,68 @@
 package com.example.portfolioservice.controller;
 
-import com.example.portfolioservice.model.PortfolioDto;
+import com.example.portfolioservice.form.PortfolioCreateForm;
+import com.example.portfolioservice.form.PortfolioUpdateForm;
+import com.example.portfolioservice.model.PortfolioResponseDto;
 import com.example.portfolioservice.service.PortfolioService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import javax.validation.Valid;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+
+
+@Api(value = "Portfolio Service")
 @RestController
+@RequestMapping(value = "/portfolio")
 public class PortfolioController {
 
     @Autowired
     PortfolioService portfolioService;
 
-    // 포트폴리오 조회
-    @GetMapping(value = "/portfolio/{id}")
-    public ResponseEntity<EntityModel<PortfolioDto>> getUserPortfolio(@PathVariable("id") long user_id) {
-        PortfolioDto portfolio = portfolioService.findByUserId(user_id);
+    @ApiOperation(value = "포트폴리오 조회", notes = "특정 유저의 포트폴리오 정보를 반환")
+    @GetMapping(value = "/{userId}")
+    public ResponseEntity<EntityModel<PortfolioResponseDto>> getUserPortfolio(@PathVariable("userId") long userId) {
+        PortfolioResponseDto portfolio = portfolioService.findByUserId(userId);
 
-        return ResponseEntity.ok().body(
-                EntityModel.of(portfolio)
-                    .add(linkTo(methodOn(PortfolioController.class).getUserPortfolio(user_id)).withSelfRel())
+        WebMvcLinkBuilder portfolioLink= linkTo(PortfolioController.class).slash(userId);
+
+        return ResponseEntity.ok().body(EntityModel.of(portfolio)
+                .add(portfolioLink.withSelfRel())
+                .add(portfolioLink.withRel("portfolioUpdate"))
+                .add(portfolioLink.withRel("portfolioDelete"))
         );
     }
 
     // 포트폴리오 삭제
-    @DeleteMapping(value = "/{id}/portfolio")
-    public ResponseEntity<Long> deletePortfolio(@PathVariable("id") long user_id) {
-        return ResponseEntity.ok().body(portfolioService.deleteByUserId(user_id));
+    @DeleteMapping(value = "/{userId}")
+    public ResponseEntity<Long> deletePortfolio(@PathVariable("userId") long userId) {
+        return ResponseEntity.ok().body(portfolioService.deleteByUserId(userId));
     }
 
     // 포트폴리오 생성 
-    @PostMapping(value = "/{userId}/portfolio")
-    public void createPortfolios() {
-    	
-    	//TODO 파라메터 넘겨준거 자바에 담기 - 시은 
-        portfolioService.createPortfolio();
+    @PostMapping(value = "/{userId}")
+    public ResponseEntity<Long> createPortfolios(@PathVariable("userId") long userId,
+                                                 @RequestBody @Valid PortfolioCreateForm portfolioCreateForm) {
+        portfolioCreateForm.setUserId(userId);
+        long portfolioId = portfolioService.createPortfolio(portfolioCreateForm);
+        return new ResponseEntity<Long>(portfolioId, HttpStatus.CREATED);
     }
 
     // 포트폴리오 수정
-//    @PutMapping(value = "/{userId}/portfolio")
-//    public EntityModel<PortfolioDto> putPortfolio(@PathVariable("id") long user_id) {
-//        PortfolioDto portfolio = portfolioService.findByUserId(user_id);
-//
-//        return ResponseEntity.ok().build();
-//    }
-    
-    // 자산 조회 
-    @GetMapping(value = "/{userId}/asset")
-    public void getAsset(){
-        portfolioService.getAsset();
+    @PutMapping(value = "/{userId}")
+    public ResponseEntity<Long> putPortfolio(@PathVariable("userId") long userId,
+                                             @RequestBody @Valid PortfolioUpdateForm portfolioUpdateForm) {
+        portfolioUpdateForm.setUserId(userId);
+        portfolioService.updatePortfolio(portfolioUpdateForm);
+        return ResponseEntity.ok().build();
     }
+
 
 }

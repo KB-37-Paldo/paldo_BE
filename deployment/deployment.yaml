@@ -24,35 +24,35 @@ spec:
         - name: PORTFOLIO_SERVICE_CONTEXT_PATH
           valueFrom:
             configMapKeyRef:
-              name: paldo-config
+              name: paldo-portfolio-config
               key: PORTFOLIO_SERVICE_CONTEXT_PATH
         - name: PORTFOLIO_SERVICE_PORT
           valueFrom:
             configMapKeyRef:
-              name: paldo-config
+              name: paldo-portfolio-config
               key: PORTFOLIO_SERVICE_PORT
         - name: DB_SERVER
           valueFrom:
             configMapKeyRef:
-              name: paldo-config
+              name: paldo-portfolio-config
               key: DB_SERVER
         - name: DB_PORT
           valueFrom:
             configMapKeyRef:
-              name: paldo-config
+              name: paldo-portfolio-config
               key: DB_PORT
         - name: PORTFOLIO_DB_NAME
           valueFrom:
             configMapKeyRef:
-              name: paldo-config
+              name: paldo-portfolio-config
               key: PORTFOLIO_DB_NAME
         - name: DB_USERNAME
           valueFrom:
             configMapKeyRef:
-              name: paldo-config
+              name: paldo-portfolio-config
               key: DB_USERNAME
         - name: DB_PASSWORD
           valueFrom:
             configMapKeyRef:
-              name: paldo-config
+              name: paldo-portfolio-config
               key: DB_PASSWORD

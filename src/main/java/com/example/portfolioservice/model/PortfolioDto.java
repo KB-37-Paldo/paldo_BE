@@ -11,11 +11,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PortfolioDto {
-    private long portfolio_id;
-    private String invest_type;
-    private long target_price;
-    private Date target_period;
-    private Date create_at;
-    private long user_id;
+    private long portfolioId;
+    private String investType;
+    private long targetPrice;
+    private Date targetPeriod;
+    private Date createAt;
+    private long userId;
     private List<PortfolioDetailDto> details;
 }

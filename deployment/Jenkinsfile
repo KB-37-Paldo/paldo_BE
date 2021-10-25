@@ -14,7 +14,7 @@ def notifyMail(STATUS, RECIPIENTS) {
 
 def email_recipients="happycloudpak@gmail.com"
 
-notifySlack("STARTED", "#FFFF00")
+//notifySlack("STARTED", "#FFFF00")
 //notifyMail("STARTED", "${email_recipients}")
 
 podTemplate(
@@ -133,11 +133,11 @@ podTemplate(
 			}
 
 			// Notify to Solutions : slack, email, sms
-			notifySlack("${currentBuild.currentResult}", "#00FF00")
+			//notifySlack("${currentBuild.currentResult}", "#00FF00")
 			//notifyMail("${currentBuild.currentResult}", "${email_recipients}")
 		} catch(e) {
 			currentBuild.result = "FAILED"
-			notifySlack("${currentBuild.currentResult}", "#FF0000")
+			//notifySlack("${currentBuild.currentResult}", "#FF0000")
 			//notifyMail("${currentBuild.currentResult}", "${email_recipients}")
 		}
 	}

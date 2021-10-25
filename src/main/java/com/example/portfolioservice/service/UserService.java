@@ -1,13 +1,11 @@
-package com.example.portfolioservice.mapper;
+package com.example.portfolioservice.service;
 
 import com.example.portfolioservice.model.UserDto;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 import java.util.Optional;
 
-@Mapper
-public interface UserMapper {
+public interface UserService {
     List<UserDto> findAll();
     UserDto findById(long userId);
 }
