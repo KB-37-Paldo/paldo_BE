@@ -16,7 +16,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Api(value = "Asset Service")
 @RestController
-@RequestMapping(value = "/portfolio")
 public class AssetController {
 
     @GetMapping(value = "/{userId}/asset")
