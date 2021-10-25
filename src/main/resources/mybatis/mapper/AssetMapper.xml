@@ -3,6 +3,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.example.portfolioservice.mapper.AssetMapper">
+    <resultMap id="assetResult" type="UserDto">
+        <result property="userId" column="'USER_ID" />
+        <result property="age" column="AGE" />
+        <result property="name" column="NAME" />
+        <result property="salary" column="SALARY" />
+        <result property="amount" column="AMOUNT" />
+        <result property="assetType" column="ASSET_TYPE" />
+    </resultMap>
+
     <select id="getAsset" resultMap="assetResult" parameterType="HoldingsDto">
         SELECT U.USER_ID,  U.AGE , U.NAME  ,U.SALARY
         ,A.AMOUNT , B.TYPE as ASSET_TYPE
