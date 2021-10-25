@@ -70,4 +70,8 @@
         INSERT INTO PORTFOLIO_DETAIL(portfolio_id, percentage, asset_type_id)
         VALUES (#{portfolioId}, #{percentage}, #{typeId})
     </insert>
+
+    <select id="findByAge" parameterType="long" resultMap="portfolioResult">
+        SELECT * FROM PORTFOLIO
+    </select>
 </mapper>

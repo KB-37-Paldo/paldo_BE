@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.example.portfolioservice.form.PortfolioCreateForm;
 import com.example.portfolioservice.form.PortfolioUpdateForm;
-import com.example.portfolioservice.model.PortfolioDto;
-import com.example.portfolioservice.model.HoldingsDto;
 import com.example.portfolioservice.model.PortfolioResponseDto;
 
 public interface PortfolioService {
@@ -24,4 +22,13 @@ public interface PortfolioService {
 
     // User의 포트폴리오가 있는지 확인
     boolean exists(long user_id);
+
+    // 연령별 포트폴리오 조회
+    List<PortfolioResponseDto> findAgePortfolio(int age);
+
+    // 자산별 포트폴리오 조회
+    List<PortfolioResponseDto> findAssetPortfolio(long asset);
+
+    // 유형별 포트폴리오 조회
+    List<PortfolioResponseDto> findInvestTypePortfolio(String investType);
 }

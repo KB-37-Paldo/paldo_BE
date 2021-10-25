@@ -3,7 +3,6 @@ package com.example.portfolioservice.mapper;
 import com.example.portfolioservice.form.PortfolioCreateForm;
 import com.example.portfolioservice.form.PortfolioDetailForm;
 import com.example.portfolioservice.form.PortfolioUpdateForm;
-import com.example.portfolioservice.model.HoldingsDto;
 import com.example.portfolioservice.model.PortfolioDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,4 +17,5 @@ public interface PortfolioMapper {
     long updatePortfolio(PortfolioUpdateForm portfolioUpdateForm);
     boolean exists(long userId);
     long createPortfolioDetail(PortfolioDetailForm portfolioDetailForm);
+    List<PortfolioDto> findByAge(int age);
 }

@@ -6,6 +6,7 @@ import com.example.portfolioservice.model.PortfolioResponseDto;
 import com.example.portfolioservice.service.PortfolioService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
@@ -62,6 +65,7 @@ public class PortfolioController {
     public ResponseEntity<Long> createPortfolios(@PathVariable("userId") long userId,
                                                  @RequestBody @Valid PortfolioCreateForm portfolioCreateForm) {
         portfolioCreateForm.setUserId(userId);
+        portfolioService.deleteByUserId(userId);
         long portfolioId = portfolioService.createPortfolio(portfolioCreateForm);
         return new ResponseEntity<Long>(portfolioId, HttpStatus.CREATED);
     }
@@ -80,4 +84,23 @@ public class PortfolioController {
         long portfolioId = portfolioService.updatePortfolio(portfolioUpdateForm);
         return ResponseEntity.ok().body(portfolioId);
     }
+
+    @ApiOperation(value = "연령별 포트폴리오 조회", notes = "연령별 포트폴리오 조회")
+    @GetMapping(value = "/age/{age}")
+    public ResponseEntity<CollectionModel<PortfolioResponseDto>> getAgePortfolio(@PathVariable("age") int age) {
+        return ResponseEntity.ok().body(CollectionModel.of(portfolioService.findAgePortfolio(age)));
+    }
+
+//    @ApiOperation(value = "자산별 포트폴리오 조회", notes = "자산별 포트폴리오 조회")
+//    @GetMapping(value = "/asset/{asset}")
+//    public ResponseEntity<EntityModel<List<PortfolioResponseDto>>> getAssetPortfolio(@PathVariable("asset") long asset) {
+//        return ResponseEntity.ok().body(portfolioService.findAssetPortfolio(asset));
+//    }
+//
+//    @ApiOperation(value = "유형별 포트폴리오 조회", notes = "유형별 포트폴리오 조회")
+//    @GetMapping(value = "/invest-type/{investType}")
+//    public ResponseEntity<EntityModel<List<PortfolioResponseDto>>> getInvestTypePortfolio(@PathVariable("investType") String investType) {
+//        return ResponseEntity.ok().body(portfolioService.findInvestTypePortfolio(investType));
+//    }
+
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PortfolioServiceImpl implements PortfolioService{
@@ -54,6 +55,23 @@ public class PortfolioServiceImpl implements PortfolioService{
     @Override
     public boolean exists(long userId) {
         return sqlsession.getMapper(PortfolioMapper.class).exists(userId);
+    }
+
+    @Override
+    public List<PortfolioResponseDto> findAgePortfolio(int age) {
+        return sqlsession.getMapper(PortfolioMapper.class).findByAge(age).stream()
+                .map(PortfolioResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PortfolioResponseDto> findAssetPortfolio(long asset) {
+        return null;
+    }
+
+    @Override
+    public List<PortfolioResponseDto> findInvestTypePortfolio(String investType) {
+        return null;
     }
 
 
