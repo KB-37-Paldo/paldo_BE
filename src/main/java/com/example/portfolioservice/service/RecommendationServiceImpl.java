@@ -13,6 +13,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONArray;
@@ -30,9 +31,9 @@ public class RecommendationServiceImpl implements RecommendationService{
 	
 	@Override
 	public PortfolioDto recommendByPortfolio(long user_id) throws IOException, ParseException{
-		PortfolioDto portfolio = sqlsession.getMapper(PortfolioMapper.class).findByUserId(user_id);
+		Optional<PortfolioDto> portfolio = sqlsession.getMapper(PortfolioMapper.class).findByUserId(user_id);
 //		UserDto user = sqlsession.getMapper(UserMapper.class).findByUserId(user_id);
-		long income = portfolio.getTarget_price();
+		long income = portfolio.get().getTargetPrice();
 //		long age = user.getAge();
 		long age = 30;
 		long cardType = 0;
