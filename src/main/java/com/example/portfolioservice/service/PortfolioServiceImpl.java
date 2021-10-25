@@ -47,11 +47,6 @@ public class PortfolioServiceImpl implements PortfolioService{
     }
 
     @Override
-    public List<HoldingsDto> getAsset() {
-    	return sqlsession.getMapper(PortfolioMapper.class).getAsset();
-    }
-
-    @Override
     public long updatePortfolio(PortfolioUpdateForm portfolioUpdateForm) {
         return sqlsession.getMapper(PortfolioMapper.class).updatePortfolio(portfolioUpdateForm);
     }

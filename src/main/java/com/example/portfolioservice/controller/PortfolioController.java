@@ -9,13 +9,13 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 @Api(value = "Portfolio Service")
@@ -51,8 +51,8 @@ public class PortfolioController {
     public ResponseEntity<Long> createPortfolios(@PathVariable("userId") long userId,
                                                  @RequestBody @Valid PortfolioCreateForm portfolioCreateForm) {
         portfolioCreateForm.setUserId(userId);
-        portfolioService.createPortfolio(portfolioCreateForm);
-        return null;
+        long portfolioId = portfolioService.createPortfolio(portfolioCreateForm);
+        return new ResponseEntity<Long>(portfolioId, HttpStatus.CREATED);
     }
 
     // 포트폴리오 수정

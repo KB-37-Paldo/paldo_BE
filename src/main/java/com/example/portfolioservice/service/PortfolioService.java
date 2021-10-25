@@ -24,8 +24,4 @@ public interface PortfolioService {
 
     // User의 포트폴리오가 있는지 확인
     boolean exists(long user_id);
-
-    // 자산조회   
-    List<HoldingsDto> getAsset();
-
 }
