@@ -4,8 +4,7 @@ import com.example.portfolioservice.form.PortfolioCreateForm;
 import com.example.portfolioservice.form.PortfolioUpdateForm;
 import com.example.portfolioservice.model.PortfolioResponseDto;
 import com.example.portfolioservice.service.PortfolioService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -26,7 +25,10 @@ public class PortfolioController {
     @Autowired
     PortfolioService portfolioService;
 
+
     @ApiOperation(value = "포트폴리오 조회", notes = "특정 유저의 포트폴리오 정보를 반환")
+    @ApiImplicitParam(name = "userId", value = "사용자 아이디", required = true,
+            dataType = "long", defaultValue = "None")
     @GetMapping(value = "/{userId}")
     public ResponseEntity<EntityModel<PortfolioResponseDto>> getUserPortfolio(@PathVariable("userId") long userId) {
         PortfolioResponseDto portfolio = portfolioService.findByUserId(userId);
@@ -40,13 +42,22 @@ public class PortfolioController {
         );
     }
 
-    // 포트폴리오 삭제
+
+    @ApiOperation(value = "포트폴리오 삭제", notes = "특정 유저의 포트폴리오 정보를 삭제")
+    @ApiImplicitParam(name = "userId", value = "사용자 아이디", required = true,
+            dataType = "long", defaultValue = "None")
     @DeleteMapping(value = "/{userId}")
     public ResponseEntity<Long> deletePortfolio(@PathVariable("userId") long userId) {
         return ResponseEntity.ok().body(portfolioService.deleteByUserId(userId));
     }
 
-    // 포트폴리오 생성 
+
+    @ApiOperation(value = "포트폴리오 생성", notes = "특정 유저의 포트폴리오 생성 정보를 전달받아 포트폴리오 정보를 생성하고 포트폴리오 아이디를 반환")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "사용자 아이디", required = true,
+                    dataType = "long", defaultValue = "None"),
+            @ApiImplicitParam(name = "portfolioCreateForm", value = "포트폴리오 생성 정보", required = true,
+                    dataType = "PortfolioCreateForm", defaultValue = "None")})
     @PostMapping(value = "/{userId}")
     public ResponseEntity<Long> createPortfolios(@PathVariable("userId") long userId,
                                                  @RequestBody @Valid PortfolioCreateForm portfolioCreateForm) {
@@ -55,14 +66,18 @@ public class PortfolioController {
         return new ResponseEntity<Long>(portfolioId, HttpStatus.CREATED);
     }
 
-    // 포트폴리오 수정
+
+    @ApiOperation(value = "포트폴리오 수정", notes = "특정 유저의 포트폴리오 수정 정보를 전달받아 포트폴리오 정보를 수정하고 포트폴리오 아이디를 반환")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "사용자 아이디", required = true,
+                    dataType = "long", defaultValue = "None"),
+            @ApiImplicitParam(name = "portfolioUpdateForm", value = "포트폴리오 수정 정보", required = true,
+                    dataType = "PortfolioUpdateForm", defaultValue = "None")})
     @PutMapping(value = "/{userId}")
     public ResponseEntity<Long> putPortfolio(@PathVariable("userId") long userId,
                                              @RequestBody @Valid PortfolioUpdateForm portfolioUpdateForm) {
         portfolioUpdateForm.setUserId(userId);
-        portfolioService.updatePortfolio(portfolioUpdateForm);
-        return ResponseEntity.ok().build();
+        long portfolioId = portfolioService.updatePortfolio(portfolioUpdateForm);
+        return ResponseEntity.ok().body(portfolioId);
     }
-
-
 }
