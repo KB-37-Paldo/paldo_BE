@@ -17,6 +17,6 @@
         ,A.AMOUNT , B.TYPE as ASSET_TYPE
         FROM USER U left outer join HOLDINGS A on U.user_id = A.user_id
         , ASSET_TYPE B
-        WHERE A.asset_type_id  = B.asset_type_id and U.userid = #{user_id}
+        WHERE A.asset_type_id  = B.asset_type_id and U.user_id = #{user_id}
     </select>
 </mapper>
