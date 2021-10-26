@@ -22,12 +22,12 @@ public class HoldingsResponseDto {
 
     public void setAmount() {
         this.totAmount = 0;
-        this.totAmount = this.cash.setTotAmount();
-        this.totAmount = this.stock.setTotAmount();
-        this.totAmount = this.realAssets.setTotAmount();
-        this.totAmount = this.bond.setTotAmount();
-        this.totAmount = this.fund.setTotAmount();
-        this.totAmount = this.realEstate.setTotAmount();
+        this.totAmount += this.cash.setTotAmount();
+        this.totAmount += this.stock.setTotAmount();
+        this.totAmount += this.realAssets.setTotAmount();
+        this.totAmount += this.bond.setTotAmount();
+        this.totAmount += this.fund.setTotAmount();
+        this.totAmount += this.realEstate.setTotAmount();
     }
 
 }
