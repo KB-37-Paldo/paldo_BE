@@ -101,7 +101,7 @@
             ON pd.asset_type_id = at2.asset_type_id ) pd
         ON (p.portfolio_id = pd.portfolio_id)
         WHERE p.portfolio_id = pd.portfolio_id
-            AND p.invest_type
+            AND p.invest_type = #{investType}
     </select>
 
 
