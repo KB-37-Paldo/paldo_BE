@@ -26,9 +26,3 @@ mybatis:
 #logging:
 #  level:
 #    org.springframework:
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: refresh, health, beans, busrefresh
