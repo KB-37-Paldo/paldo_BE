@@ -10,6 +10,7 @@
         <result property="createAt" column="create_at"/>
         <result property="targetPeriod" column="target_period"/>
         <result property="userId" column="user_id"/>
+        <result property="description" column="description"/>
         <collection property="details" column="portfolio_id" javaType="java.util.ArrayList" ofType="PortfolioDetailDto">
             <id property="portfolioDetailId" column="portfolio_detail_id"/>
             <result property="percentage" column="percentage"/>
@@ -39,8 +40,8 @@
 
 	<insert id="createPortfolio" parameterType="com.example.portfolioservice.form.PortfolioCreateForm"
             useGeneratedKeys="true" keyColumn="portfolio_id" keyProperty="portfolioId">
-        INSERT INTO PORTFOLIO(invest_type, target_period, target_price, user_id)
-        VALUES(#{investType}, #{targetPeriod}, #{targetPrice}, #{userId});
+        INSERT INTO PORTFOLIO(invest_type, target_period, target_price, user_id, description)
+        VALUES(#{investType}, #{targetPeriod}, #{targetPrice}, #{userId}, #{description});
 	</insert>
 
 	<delete id="deleteByUserId" parameterType="long">

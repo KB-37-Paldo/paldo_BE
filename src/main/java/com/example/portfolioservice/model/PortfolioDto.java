@@ -17,5 +17,6 @@ public class PortfolioDto {
     private Date targetPeriod;
     private Date createAt;
     private long userId;
+    private String description;
     private List<PortfolioDetailDto> details;
 }

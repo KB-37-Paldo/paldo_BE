@@ -16,7 +16,8 @@ public class PortfolioCreateForm {
     private long portfolioId;
 
     private String investType;
-
+    
+    private String description;
     @Min(0)
     private long targetPrice;
 
