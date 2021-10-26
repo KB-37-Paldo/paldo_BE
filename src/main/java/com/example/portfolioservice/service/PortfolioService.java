@@ -1,6 +1,9 @@
 package com.example.portfolioservice.service;
 
+import java.io.IOException;
 import java.util.List;
+
+import org.json.simple.parser.ParseException;
 
 import com.example.portfolioservice.form.PortfolioCreateForm;
 import com.example.portfolioservice.form.PortfolioUpdateForm;
@@ -15,7 +18,7 @@ public interface PortfolioService {
     long deleteByUserId(long userId);
 
     // 포트폴리오 생성
-    long createPortfolio(PortfolioCreateForm portfolioCreateForm);
+    long createPortfolio(PortfolioCreateForm portfolioCreateForm) throws IOException, ParseException;
 
     // 포트폴리오 수정
     long updatePortfolio(PortfolioUpdateForm portfolioUpdateForm);

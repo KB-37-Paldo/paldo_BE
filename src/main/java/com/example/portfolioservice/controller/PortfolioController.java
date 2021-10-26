@@ -5,6 +5,8 @@ import com.example.portfolioservice.form.PortfolioUpdateForm;
 import com.example.portfolioservice.model.PortfolioResponseDto;
 import com.example.portfolioservice.service.PortfolioService;
 import io.swagger.annotations.*;
+
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -63,7 +66,7 @@ public class PortfolioController {
                     dataType = "PortfolioCreateForm", defaultValue = "None")})
     @PostMapping(value = "/{userId}")
     public ResponseEntity<Long> createPortfolios(@PathVariable("userId") long userId,
-                                                 @RequestBody @Valid PortfolioCreateForm portfolioCreateForm) {
+                                                 @RequestBody @Valid PortfolioCreateForm portfolioCreateForm) throws IOException, ParseException{
         portfolioCreateForm.setUserId(userId);
         portfolioService.deleteByUserId(userId);
         long portfolioId = portfolioService.createPortfolio(portfolioCreateForm);
