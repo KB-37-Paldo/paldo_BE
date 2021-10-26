@@ -39,8 +39,8 @@
 
 	<insert id="createPortfolio" parameterType="com.example.portfolioservice.form.PortfolioCreateForm"
             useGeneratedKeys="true" keyColumn="portfolio_id" keyProperty="portfolioId">
-        INSERT INTO PORTFOLIO(invest_type, target_period, target_price, user_id)
-        VALUES(#{investType}, #{targetPeriod}, #{targetPrice}, #{userId});
+        INSERT INTO PORTFOLIO(invest_type, target_period, target_price, user_id, description)
+        VALUES(#{investType}, #{targetPeriod}, #{targetPrice}, #{userId}, #{description});
 	</insert>
 
 	<delete id="deleteByUserId" parameterType="long">

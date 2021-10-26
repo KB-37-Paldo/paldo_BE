@@ -45,7 +45,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     @Override
     public long createPortfolio(PortfolioCreateForm portfolioCreateForm) throws IOException, ParseException{
-        sqlsession.getMapper(PortfolioMapper.class).createPortfolio(portfolioCreateForm);
+    	
         long targetPrice = portfolioCreateForm.getTargetPrice();
         Date targetDate = portfolioCreateForm.getTargetPeriod();
         Date toDate = new Date();
@@ -70,6 +70,13 @@ public class PortfolioServiceImpl implements PortfolioService {
 		JSONObject jsonCluster = (JSONObject) clusterAnswer;
 		JSONObject predictionAnswers = (JSONObject) jsonCluster.get(String.valueOf(clusterId));
 		System.out.println(predictionAnswers);
+		if(clusterId == 0 || clusterId == 5) {
+			portfolioCreateForm.setDescription("안정적인 목표를 선택하셨습니다. 위험성이 적은 포트폴리오에 투자성향을 반영하여 추천드렸습니다.");
+		} else if(clusterId == 1 || clusterId == 3) {
+			portfolioCreateForm.setDescription("일반적인 목표를 선택하셨습니다. 표준적인 포트폴리오에 투자성향을 반영하여 추천드렸습니다.");
+		} else {
+			portfolioCreateForm.setDescription("도전적인 목표를 선택하셨습니다. 높은 수익률의 포트폴리오에 투자성향을 반영하여 추천드렸습니다.");
+		}
 		
 		long cash = (long) predictionAnswers.get("cash");
 		long stock = (long) predictionAnswers.get("stock");
@@ -95,6 +102,7 @@ public class PortfolioServiceImpl implements PortfolioService {
         sqlsession.getMapper(PortfolioMapper.class).createPortfolioDetail(new PortfolioDetailForm(id, AssetType.fund.getTypeId(), ifund + investType.getFund()));
         sqlsession.getMapper(PortfolioMapper.class).createPortfolioDetail(new PortfolioDetailForm(id, AssetType.realEstate.getTypeId(), irealEstate + investType.getRealEstate()));
 
+        sqlsession.getMapper(PortfolioMapper.class).createPortfolio(portfolioCreateForm);
         return id;
     }
 
