@@ -1,11 +1,9 @@
 package com.example.portfolioservice.service;
 
-import com.example.portfolioservice.model.HoldingsDto;
-
-import java.util.List;
+import com.example.portfolioservice.model.HoldingsResponseDto;
 
 public interface AssetService {
     // 자산조회
-    List<HoldingsDto> getAsset(HoldingsDto vo);
+    HoldingsResponseDto getAsset(long userId);
 
 }

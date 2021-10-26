@@ -1,7 +1,10 @@
 package com.example.portfolioservice.controller;
 
 import com.example.portfolioservice.model.HoldingsDto;
+import com.example.portfolioservice.model.HoldingsResponseDto;
+import com.example.portfolioservice.service.AssetService;
 import io.swagger.annotations.Api;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +18,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 public class AssetController {
 
-    @GetMapping(value = "/{userId}/asset")
-    public ResponseEntity<EntityModel<HoldingsDto>> getAsset(@PathVariable(name = "userId") long user_id) {
+    @Autowired
+    AssetService assetService;
 
-        HoldingsDto vo = new HoldingsDto();
-        vo.setUser_id(user_id);
-        // List<HoldingsDto> result = portfolioService.getAsset(vo);
+    @GetMapping(value = "/asset/{userId}")
+    public ResponseEntity<EntityModel<HoldingsResponseDto>> getAsset(@PathVariable(name = "userId") long userId) {
 
-        return ResponseEntity.ok().body(
-                EntityModel.of(vo).add(linkTo(methodOn(AssetController.class).getAsset(user_id)).withSelfRel()));
-
+        HoldingsResponseDto response = new HoldingsResponseDto();
+        return ResponseEntity.ok().body(EntityModel.of(assetService.getAsset(userId)));
     }
 }
