@@ -30,26 +30,20 @@ public class AssetServiceImpl implements AssetService{
         }
         for (HoldingsDto holding : holdings) {
             if (holding.getAssetType().equals(AssetType.cash.getTitle())) {
-                response.getCash().add(holding);
-                response.setCashAmount(response.getCashAmount()+holding.getAmount());
+                response.getCash().getData().add(holding);
             }else if (holding.getAssetType().equals(AssetType.stock.getTitle())) {
-                response.getStock().add(holding);
-                response.setStockAmount(response.getCashAmount()+holding.getAmount());
+                response.getStock().getData().add(holding);
             }else if (holding.getAssetType().equals(AssetType.gold.getTitle())) {
-                response.getGold().add(holding);
-                response.setGoldAmount(response.getGoldAmount()+holding.getAmount());
+                response.getRealAssets().getData().add(holding);
             }else if (holding.getAssetType().equals(AssetType.bond.getTitle())) {
-                response.getBond().add(holding);
-                response.setBondAmount(response.getBondAmount()+holding.getAmount());
+                response.getBond().getData().add(holding);
             }else if (holding.getAssetType().equals(AssetType.fund.getTitle())) {
-                response.getFund().add(holding);
-                response.setFundAmount(response.getFundAmount()+holding.getAmount());
+                response.getFund().getData().add(holding);
             }else if (holding.getAssetType().equals(AssetType.realEstate.getTitle())) {
-                response.getRealEstate().add(holding);
-                response.setRealEstateAmount(response.getRealEstateAmount()+holding.getAmount());
+                response.getRealEstate().getData().add(holding);
             }
         }
-        response.setTotalAmount();
+        response.setAmount();
         return response;
     }
 }

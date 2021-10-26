@@ -10,24 +10,24 @@ import java.util.List;
 @Getter
 @Setter
 public class HoldingsResponseDto {
-    private long targetPrice;
-    private Date targetDate;
-    private long totalAmount;
-    private long cashAmount;
-    private long stockAmount;
-    private long goldAmount;
-    private long bondAmount;
-    private long fundAmount;
-    private long realEstateAmount;
-    private List<HoldingsDto> cash = new ArrayList<HoldingsDto>();
-    private List<HoldingsDto> stock = new ArrayList<HoldingsDto>();
-    private List<HoldingsDto> gold = new ArrayList<HoldingsDto>();
-    private List<HoldingsDto> bond = new ArrayList<HoldingsDto>();
-    private List<HoldingsDto> fund = new ArrayList<HoldingsDto>();
-    private List<HoldingsDto> realEstate = new ArrayList<HoldingsDto>();
+    private long targetPrice = 0;
+    private Date targetDate = null;
+    private long totAmount = 0;
+    private HoldingsDetailDto cash = new HoldingsDetailDto();
+    private HoldingsDetailDto stock = new HoldingsDetailDto();
+    private HoldingsDetailDto realAssets = new HoldingsDetailDto();
+    private HoldingsDetailDto bond = new HoldingsDetailDto();
+    private HoldingsDetailDto fund = new HoldingsDetailDto();
+    private HoldingsDetailDto realEstate = new HoldingsDetailDto();
 
-    public void setTotalAmount() {
-        this.totalAmount = this.cashAmount + this.stockAmount + this.goldAmount + this.bondAmount
-                + this.fundAmount + this.realEstateAmount;
+    public void setAmount() {
+        this.totAmount = 0;
+        this.totAmount = this.cash.setTotAmount();
+        this.totAmount = this.stock.setTotAmount();
+        this.totAmount = this.realAssets.setTotAmount();
+        this.totAmount = this.bond.setTotAmount();
+        this.totAmount = this.fund.setTotAmount();
+        this.totAmount = this.realEstate.setTotAmount();
     }
+
 }
