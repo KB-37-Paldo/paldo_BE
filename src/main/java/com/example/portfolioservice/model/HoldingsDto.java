@@ -10,9 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HoldingsDto {
-    private int holdings_id;
+    private int holdingsId;
     private long amount;
-    private String detail_type;
-    private long user_id;
-    private long asset_type_id;
+    private String detailType;
+    private String assetType;
 }

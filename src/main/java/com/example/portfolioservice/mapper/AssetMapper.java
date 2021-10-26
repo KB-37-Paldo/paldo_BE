@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface AssetMapper {
-    List<HoldingsDto> getAsset(HoldingsDto vo);
+    List<HoldingsDto> getAsset(long userId);
 }
