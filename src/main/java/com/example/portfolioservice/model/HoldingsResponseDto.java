@@ -13,7 +13,7 @@ public class HoldingsResponseDto {
     private long totAmount = 0;
     private float cashAmount;
     private float stockAmount;
-    private float realAssetsAmount;
+    private float goldAmount;
     private float bondAmount;
     private float fundAmount;
     private float realEstateAmount;
@@ -34,7 +34,7 @@ public class HoldingsResponseDto {
         this.totAmount += this.realEstate.setTotAmount();
         this.cashAmount = Math.round(((float) this.cash.getTotAmount() / this.totAmount)*1000)/10.0f;
         this.stockAmount = Math.round(((float) this.stock.getTotAmount() / this.totAmount)*1000)/10.0f;
-        this.realAssetsAmount = Math.round(((float) this.realAssets.getTotAmount() / this.totAmount)*1000)/10.0f;
+        this.goldAmount = Math.round(((float) this.realAssets.getTotAmount() / this.totAmount)*1000)/10.0f;
         this.bondAmount = Math.round(((float) this.bond.getTotAmount() / this.totAmount)*1000)/10.0f;
         this.fundAmount = Math.round(((float) this.fund.getTotAmount() / this.totAmount)*1000)/10.0f;
         this.realEstateAmount = Math.round(((float) this.realEstate.getTotAmount() / this.totAmount)*1000)/10.0f;
