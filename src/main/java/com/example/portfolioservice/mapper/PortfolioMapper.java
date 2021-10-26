@@ -6,6 +6,7 @@ import com.example.portfolioservice.form.PortfolioUpdateForm;
 import com.example.portfolioservice.model.PortfolioDto;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,4 +19,6 @@ public interface PortfolioMapper {
     boolean exists(long userId);
     long createPortfolioDetail(PortfolioDetailForm portfolioDetailForm);
     List<PortfolioDto> findByAge(int age);
+    List<PortfolioDto> findByAsset(long asset);
+    List<PortfolioDto> findByInvestType(String investType);
 }

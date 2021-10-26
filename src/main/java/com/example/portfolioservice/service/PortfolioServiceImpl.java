@@ -66,12 +66,16 @@ public class PortfolioServiceImpl implements PortfolioService{
 
     @Override
     public List<PortfolioResponseDto> findAssetPortfolio(long asset) {
-        return null;
+        return sqlsession.getMapper(PortfolioMapper.class).findByAsset(asset).stream()
+                .map(PortfolioResponseDto::new)
+                .collect(Collectors.toList());
     }
 
     @Override
     public List<PortfolioResponseDto> findInvestTypePortfolio(String investType) {
-        return null;
+        return sqlsession.getMapper(PortfolioMapper.class).findByInvestType(investType).stream()
+                .map(PortfolioResponseDto::new)
+                .collect(Collectors.toList());
     }
 
 

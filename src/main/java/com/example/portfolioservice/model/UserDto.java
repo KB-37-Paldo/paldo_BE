@@ -14,5 +14,4 @@ public class UserDto {
     private Long salary;
     private boolean portfolio;
     private long amount;
-    private String assetType;
 }

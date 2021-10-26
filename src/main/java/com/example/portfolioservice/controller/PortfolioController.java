@@ -93,16 +93,20 @@ public class PortfolioController {
         return ResponseEntity.ok().body(EntityModel.of(response));
     }
 
-//    @ApiOperation(value = "자산별 포트폴리오 조회", notes = "자산별 포트폴리오 조회")
-//    @GetMapping(value = "/asset/{asset}")
-//    public ResponseEntity<EntityModel<List<PortfolioResponseDto>>> getAssetPortfolio(@PathVariable("asset") long asset) {
-//        return ResponseEntity.ok().body(portfolioService.findAssetPortfolio(asset));
-//    }
-//
-//    @ApiOperation(value = "유형별 포트폴리오 조회", notes = "유형별 포트폴리오 조회")
-//    @GetMapping(value = "/invest-type/{investType}")
-//    public ResponseEntity<EntityModel<List<PortfolioResponseDto>>> getInvestTypePortfolio(@PathVariable("investType") String investType) {
-//        return ResponseEntity.ok().body(portfolioService.findInvestTypePortfolio(investType));
-//    }
+    @ApiOperation(value = "자산별 포트폴리오 조회", notes = "자산별 포트폴리오 조회")
+    @GetMapping(value = "/asset/{asset}")
+    public ResponseEntity<EntityModel<Map<String, Object>>> getAssetPortfolio(@PathVariable("asset") long asset) {
+        Map<String, Object> response = new HashMap<String, Object>();
+        response.put("portfolios", portfolioService.findAssetPortfolio(asset));
+        return ResponseEntity.ok().body(EntityModel.of(response));
+    }
+
+    @ApiOperation(value = "유형별 포트폴리오 조회", notes = "유형별 포트폴리오 조회")
+    @GetMapping(value = "/invest-type/{investType}")
+    public ResponseEntity<EntityModel<Map<String, Object>>> getInvestTypePortfolio(@PathVariable("investType") String investType) {
+        Map<String, Object> response = new HashMap<String, Object>();
+        response.put("portfolios", portfolioService.findInvestTypePortfolio(investType));
+        return ResponseEntity.ok().body(EntityModel.of(response));
+    }
 
 }
