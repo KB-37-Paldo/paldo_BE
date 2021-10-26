@@ -86,6 +86,8 @@ public class PortfolioController {
     }
 
     @ApiOperation(value = "연령별 포트폴리오 조회", notes = "연령별 포트폴리오 조회")
+    @ApiImplicitParam(name = "age", value = "나이", required = true,
+            dataType = "int", defaultValue = "None")
     @GetMapping(value = "/age/{age}")
     public ResponseEntity<EntityModel<Map<String, Object>>> getAgePortfolio(@PathVariable("age") int age) {
         Map<String, Object> response = new HashMap<String, Object>();
@@ -94,6 +96,8 @@ public class PortfolioController {
     }
 
     @ApiOperation(value = "자산별 포트폴리오 조회", notes = "자산별 포트폴리오 조회")
+    @ApiImplicitParam(name = "asset", value = "자산 (단위: ₩)", required = true,
+            dataType = "long", defaultValue = "None")
     @GetMapping(value = "/asset/{asset}")
     public ResponseEntity<EntityModel<Map<String, Object>>> getAssetPortfolio(@PathVariable("asset") long asset) {
         Map<String, Object> response = new HashMap<String, Object>();
@@ -102,6 +106,8 @@ public class PortfolioController {
     }
 
     @ApiOperation(value = "유형별 포트폴리오 조회", notes = "유형별 포트폴리오 조회")
+    @ApiImplicitParam(name = "investType", value = "투자성향", required = true,
+            dataType = "String", defaultValue = "None")
     @GetMapping(value = "/invest-type/{investType}")
     public ResponseEntity<EntityModel<Map<String, Object>>> getInvestTypePortfolio(@PathVariable("investType") String investType) {
         Map<String, Object> response = new HashMap<String, Object>();
