@@ -71,7 +71,14 @@
         VALUES (#{portfolioId}, #{percentage}, #{typeId})
     </insert>
 
-    <select id="findByAge" parameterType="long" resultMap="portfolioResult">
-        SELECT * FROM PORTFOLIO
+    <select id="findByAge" parameterType="int" resultMap="portfolioResult">
+        SELECT *
+        FROM PORTFOLIO p LEFT OUTER JOIN
+            (SELECT pd.portfolio_detail_id as portfolio_detail_id, pd.portfolio_id as portfolio_id, pd.percentage as percentage, at2.`type`
+            FROM PORTFOLIO_DETAIL pd JOIN ASSET_TYPE at2
+            ON pd.asset_type_id = at2.asset_type_id ) pd
+        ON (p.portfolio_id = pd.portfolio_id)
+        WHERE p.portfolio_id = pd.portfolio_id
+            AND #{age} = (SELECT age DIV 10 FROM USER WHERE user_id = p.user_id)
     </select>
 </mapper>

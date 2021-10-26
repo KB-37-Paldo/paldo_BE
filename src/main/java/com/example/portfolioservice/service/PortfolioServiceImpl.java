@@ -59,7 +59,7 @@ public class PortfolioServiceImpl implements PortfolioService{
 
     @Override
     public List<PortfolioResponseDto> findAgePortfolio(int age) {
-        return sqlsession.getMapper(PortfolioMapper.class).findByAge(age).stream()
+        return sqlsession.getMapper(PortfolioMapper.class).findByAge((int)(age/10)).stream()
                 .map(PortfolioResponseDto::new)
                 .collect(Collectors.toList());
     }

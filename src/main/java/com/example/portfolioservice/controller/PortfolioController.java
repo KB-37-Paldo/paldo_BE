@@ -6,7 +6,6 @@ import com.example.portfolioservice.model.PortfolioResponseDto;
 import com.example.portfolioservice.service.PortfolioService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
@@ -15,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
@@ -87,8 +87,10 @@ public class PortfolioController {
 
     @ApiOperation(value = "연령별 포트폴리오 조회", notes = "연령별 포트폴리오 조회")
     @GetMapping(value = "/age/{age}")
-    public ResponseEntity<CollectionModel<PortfolioResponseDto>> getAgePortfolio(@PathVariable("age") int age) {
-        return ResponseEntity.ok().body(CollectionModel.of(portfolioService.findAgePortfolio(age)));
+    public ResponseEntity<EntityModel<Map<String, Object>>> getAgePortfolio(@PathVariable("age") int age) {
+        Map<String, Object> response = new HashMap<String, Object>();
+        response.put("portfolios", portfolioService.findAgePortfolio(age));
+        return ResponseEntity.ok().body(EntityModel.of(response));
     }
 
 //    @ApiOperation(value = "자산별 포트폴리오 조회", notes = "자산별 포트폴리오 조회")
