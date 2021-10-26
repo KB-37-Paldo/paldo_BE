@@ -10,6 +10,7 @@
         <result property="createAt" column="create_at"/>
         <result property="targetPeriod" column="target_period"/>
         <result property="userId" column="user_id"/>
+        <result property="description" column="description"/>
         <collection property="details" column="portfolio_id" javaType="java.util.ArrayList" ofType="PortfolioDetailDto">
             <id property="portfolioDetailId" column="portfolio_detail_id"/>
             <result property="percentage" column="percentage"/>

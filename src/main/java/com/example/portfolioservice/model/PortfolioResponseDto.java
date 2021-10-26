@@ -17,6 +17,7 @@ public class PortfolioResponseDto {
     private String investType;
     private long targetPrice;
     private Date targetPeriod;
+    private String description;
     private Date createAt;
     private long userId;
     private int cashAmount;
@@ -31,6 +32,7 @@ public class PortfolioResponseDto {
         this.investType = portfolioDto.getInvestType();
         this.targetPrice = portfolioDto.getTargetPrice();
         this.targetPeriod = portfolioDto.getTargetPeriod();
+        this.description = portfolioDto.getDescription();
         this.createAt = portfolioDto.getCreateAt();
         this.userId = portfolioDto.getUserId();
         this.setAmount(portfolioDto.getDetails());
