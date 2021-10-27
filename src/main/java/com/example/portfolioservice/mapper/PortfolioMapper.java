@@ -6,7 +6,6 @@ import com.example.portfolioservice.form.PortfolioUpdateForm;
 import com.example.portfolioservice.model.PortfolioDto;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
