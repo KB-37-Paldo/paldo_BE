@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
-    private int prodcutId;
+    private int productId;
     private String detailType;
     private String assetType;
 }
