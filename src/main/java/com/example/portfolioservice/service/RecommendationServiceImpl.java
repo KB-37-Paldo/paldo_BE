@@ -3,6 +3,8 @@ package com.example.portfolioservice.service;
 import com.example.portfolioservice.mapper.PortfolioMapper;
 import com.example.portfolioservice.mapper.UserMapper;
 import com.example.portfolioservice.model.PortfolioDto;
+import com.example.portfolioservice.model.ProductDto;
+import com.example.portfolioservice.model.ProductResponseDto;
 import com.example.portfolioservice.model.UserDto;
 
 import java.io.BufferedReader;
@@ -29,26 +31,38 @@ public class RecommendationServiceImpl implements RecommendationService{
 	@Autowired
 	SqlSession sqlsession;
 	
+//	@Override
+//	public ProductResponseDto recommendByPortfolio(long user_id) throws IOException, ParseException{
+//		Optional<PortfolioDto> portfolio = sqlsession.getMapper(PortfolioMapper.class).findByUserId(user_id);
+////		UserDto user = sqlsession.getMapper(UserMapper.class).findByUserId(user_id);
+//		long income = portfolio.get().getTargetPrice();
+////		long age = user.getAge();
+//		long age = 30;
+//		long cardType = 0;
+//		String param = "["+income + ", " + age + ", " + cardType + "]";
+//		String jsonStringScoring = createConnection(param);
+//		JSONParser parser = new JSONParser();
+//		Object Scoring = parser.parse(jsonStringScoring);
+//		JSONObject jsonObj = (JSONObject) Scoring;
+//		JSONArray predictions = (JSONArray) jsonObj.get("predictions");
+//		JSONObject objValue = (JSONObject) predictions.get(0);
+//		JSONArray values = (JSONArray) objValue.get("values");
+//		JSONArray value = (JSONArray) values.get(0);
+//		long cluster_id = (long) value.get(0);
+//		PortfolioDto recommendedPortfolio = findByCluster(cluster_id);
+//		return recommendedPortfolio;
+//	}
+	
 	@Override
-	public PortfolioDto recommendByPortfolio(long user_id) throws IOException, ParseException{
-		Optional<PortfolioDto> portfolio = sqlsession.getMapper(PortfolioMapper.class).findByUserId(user_id);
-//		UserDto user = sqlsession.getMapper(UserMapper.class).findByUserId(user_id);
-		long income = portfolio.get().getTargetPrice();
-//		long age = user.getAge();
-		long age = 30;
-		long cardType = 0;
-		String param = "["+income + ", " + age + ", " + cardType + "]";
-		String jsonStringScoring = createConnection(param);
-		JSONParser parser = new JSONParser();
-		Object Scoring = parser.parse(jsonStringScoring);
-		JSONObject jsonObj = (JSONObject) Scoring;
-		JSONArray predictions = (JSONArray) jsonObj.get("predictions");
-		JSONObject objValue = (JSONObject) predictions.get(0);
-		JSONArray values = (JSONArray) objValue.get("values");
-		JSONArray value = (JSONArray) values.get(0);
-		long cluster_id = (long) value.get(0);
-		PortfolioDto recommendedPortfolio = findByCluster(cluster_id);
-		return recommendedPortfolio;
+	public ProductResponseDto recommendByProduct(long user_id) throws IOException, ParseException{
+		ProductResponseDto productResponseDto = new ProductResponseDto();
+		ProductDto productDto = new ProductDto();
+		productDto.setAssetType("현금성");
+		productDto.setDetailType("KB내맘대로적금");
+		productDto.setProdcutId(0);
+
+		productResponseDto.getCash().add(productDto);
+		return productResponseDto;
 	}
 	
 	public PortfolioDto findByCluster(long cluster_id) {
