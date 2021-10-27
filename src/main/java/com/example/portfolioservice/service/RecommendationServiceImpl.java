@@ -92,7 +92,7 @@ public class RecommendationServiceImpl implements RecommendationService{
 		JSONObject objValue = (JSONObject) predictions.get(0);
 		JSONArray values = (JSONArray) objValue.get("values");
 		JSONArray value = (JSONArray) values.get(0);
-		long clusterId = (long) value.get(0);
+		
 		
 		List<Integer> data1 = Arrays.asList(15, 17, 27, 12, 28);         
 		List<Integer> data2 = Arrays.asList(17, 22, 7, 13, 19);      
@@ -111,6 +111,7 @@ public class RecommendationServiceImpl implements RecommendationService{
 		List<Integer> data15 = Arrays.asList(13, 2, 6, 15, 7);
 		List<List<Integer>> datas = Arrays.asList(data1, data2, data3, data4, data5, data6, data7, data8, data9, data10, data11, data12, data13, data14, data15);
 		
+		long clusterId = (long) value.get(0);
 		int intClusterId = Long.valueOf(clusterId).intValue();
 		List<Integer> groupIds = datas.get(intClusterId);
 		
@@ -121,12 +122,15 @@ public class RecommendationServiceImpl implements RecommendationService{
 		
 		mapParam.put("assetTypeIds", assetTypeIds);
 		mapParam.put("groupIds", groupIds);
-		
-		
-		
 			
 		List<ProductDto> cash = sqlsession.getMapper(ProductMapper.class).getProduct(mapParam);
         
+		
+		value = (JSONArray) values.get(2);
+		clusterId = (long) value.get(0);
+		intClusterId = Long.valueOf(clusterId).intValue();
+		groupIds = datas.get(intClusterId);
+		mapParam.put("groupIds", groupIds);
 		mapParam.put("assetTypeIds", assetTypeIds2);
 		List<ProductDto> invest = sqlsession.getMapper(ProductMapper.class).getProduct(mapParam);
 		
