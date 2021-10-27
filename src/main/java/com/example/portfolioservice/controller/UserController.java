@@ -30,18 +30,7 @@ public class UserController {
     @Autowired
     PortfolioService portfolioService;
 
-
-    @ApiOperation(value = "모든 유저 정보 조회", notes = "모든 유저의 정보를 조회하여 반환")
-    @GetMapping(value = "/users")
-    public ResponseEntity<List<EntityModel<UserDto>>> findAll() {
-        return ResponseEntity.ok().body(userService.findAll().stream().map(user -> {
-                EntityModel<UserDto> userModel = EntityModel.of(user);
-                return userModel;
-            }).collect(Collectors.toList())
-        );
-    }
-
-
+    
     @ApiOperation(value = "특정 유저 정보 조회", notes = "특정 유저의 식별자로 정보를 조회하여 반환")
     @ApiImplicitParam(name = "userId", value = "사용자 아이디", required = true,
                     dataType = "long", defaultValue = "None")

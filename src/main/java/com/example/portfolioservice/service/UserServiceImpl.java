@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService{
@@ -15,10 +14,6 @@ public class UserServiceImpl implements UserService{
     @Autowired
     SqlSession sqlsession;
 
-    @Override
-    public List<UserDto> findAll() {
-        return sqlsession.getMapper(UserMapper.class).findAll();
-    }
 
     @Override
     public UserDto findById(long userId) {
