@@ -91,7 +91,6 @@
             ON pd.asset_type_id = at2.asset_type_id ) pd
         ON (p.portfolio_id = pd.portfolio_id)
         WHERE p.portfolio_id = pd.portfolio_id
-            AND (SELECT SUM(amount) FROM HOLDINGS WHERE user_id = p.user_id) BETWEEN #{asset}*0.9 AND #{asset}*1.1
     </select>
 
     <select id="findByInvestType" parameterType="String" resultMap="portfolioResult">

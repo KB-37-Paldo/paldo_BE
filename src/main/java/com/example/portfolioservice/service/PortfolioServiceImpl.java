@@ -39,8 +39,7 @@ public class PortfolioServiceImpl implements PortfolioService {
     @Override
     public PortfolioResponseDto findByUserId(long userId) {
         Optional<PortfolioDto> portfolio = sqlsession.getMapper(PortfolioMapper.class).findByUserId(userId);
-        System.out.println(portfolio.get().getDescription());
-        
+
         PortfolioResponseDto portfolioResponseDto = new PortfolioResponseDto(portfolio.get());
         return portfolioResponseDto;
     }

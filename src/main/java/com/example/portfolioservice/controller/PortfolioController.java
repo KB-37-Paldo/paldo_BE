@@ -6,6 +6,7 @@ import com.example.portfolioservice.model.PortfolioResponseDto;
 import com.example.portfolioservice.service.PortfolioService;
 import io.swagger.annotations.*;
 
+import org.apache.ibatis.annotations.Param;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
@@ -88,6 +89,7 @@ public class PortfolioController {
         return ResponseEntity.ok().body(portfolioId);
     }
 
+
     @ApiOperation(value = "연령별 포트폴리오 조회", notes = "연령별 포트폴리오 조회")
     @ApiImplicitParam(name = "age", value = "나이", required = true,
             dataType = "int", defaultValue = "None")
@@ -98,22 +100,25 @@ public class PortfolioController {
         return ResponseEntity.ok().body(EntityModel.of(response));
     }
 
+
     @ApiOperation(value = "자산별 포트폴리오 조회", notes = "자산별 포트폴리오 조회")
     @ApiImplicitParam(name = "asset", value = "자산 (단위: ₩)", required = true,
             dataType = "long", defaultValue = "None")
     @GetMapping(value = "/asset/{asset}")
     public ResponseEntity<EntityModel<Map<String, Object>>> getAssetPortfolio(@PathVariable("asset") long asset) {
-        Map<String, Object> response = new HashMap<String, Object>();
+        Map<String, Object> response = new HashMap<>();
         response.put("portfolios", portfolioService.findAssetPortfolio(asset));
         return ResponseEntity.ok().body(EntityModel.of(response));
     }
 
-    @ApiOperation(value = "유형별 포트폴리오 조회", notes = "유형별 포트폴리오 조회")
-    @ApiImplicitParam(name = "investType", value = "투자성향", required = true,
-            dataType = "String", defaultValue = "None")
-    @GetMapping(value = "/invest-type/{investType}")
-    public ResponseEntity<EntityModel<Map<String, Object>>> getInvestTypePortfolio(@PathVariable("investType") String investType) {
-        Map<String, Object> response = new HashMap<String, Object>();
+
+    @ApiOperation(value = "투자 유형별 포트폴리오 조회", notes = "투자 유형별 포트폴리오 조회")
+    @ApiImplicitParam(name = "investType", value = "투자 유형", required = true,
+            dataType = "String", defaultValue = "위험중립형")
+    @GetMapping(value = "/invest-type")
+    public ResponseEntity<EntityModel<Map<String, Object>>> getInvestTypePortfolio(@Param("investType") String investType) {
+        Map<String, Object> response = new HashMap<>();
+        System.out.println(investType);
         response.put("portfolios", portfolioService.findInvestTypePortfolio(investType));
         return ResponseEntity.ok().body(EntityModel.of(response));
     }

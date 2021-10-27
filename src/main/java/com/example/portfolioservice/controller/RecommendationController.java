@@ -23,7 +23,7 @@ public class RecommendationController {
 
 	@Autowired
 	RecommendationService recommendationService;
-	
+
 	@ApiOperation(value = "추천 상품 조회", notes = "특정 유저의 추천 상품 정보를 반환")
 	@ApiImplicitParam(name = "userId", value = "사용자 아이디", required = true,
     dataType = "long", defaultValue = "None")
