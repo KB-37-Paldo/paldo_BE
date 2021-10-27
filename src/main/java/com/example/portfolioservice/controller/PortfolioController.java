@@ -106,7 +106,7 @@ public class PortfolioController {
             dataType = "long", defaultValue = "None")
     @GetMapping(value = "/asset/{asset}")
     public ResponseEntity<EntityModel<Map<String, Object>>> getAssetPortfolio(@PathVariable("asset") long asset) {
-        Map<String, Object> response = new HashMap<String, Object>();
+        Map<String, Object> response = new HashMap<>();
         response.put("portfolios", portfolioService.findAssetPortfolio(asset));
         return ResponseEntity.ok().body(EntityModel.of(response));
     }
