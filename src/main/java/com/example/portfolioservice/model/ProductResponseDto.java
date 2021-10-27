@@ -11,10 +11,6 @@ import java.util.List;
 @Setter
 public class ProductResponseDto {
 	private List<ProductDto> cash = new ArrayList<>();
-	private List<ProductDto> stock = new ArrayList<>(); 
-	private List<ProductDto> realAssets = new ArrayList<>(); 
-	private List<ProductDto> bond = new ArrayList<>();
-	private List<ProductDto> fund = new ArrayList<>();
-	private List<ProductDto> realEstate = new ArrayList<>();
+	private List<ProductDto> invest = new ArrayList<>(); 
 	
 }
