@@ -6,6 +6,7 @@ import com.example.portfolioservice.model.PortfolioResponseDto;
 import com.example.portfolioservice.service.PortfolioService;
 import io.swagger.annotations.*;
 
+import org.apache.ibatis.annotations.Param;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.EntityModel;
@@ -109,11 +110,10 @@ public class PortfolioController {
     }
 
     @ApiOperation(value = "유형별 포트폴리오 조회", notes = "유형별 포트폴리오 조회")
-    @ApiImplicitParam(name = "investType", value = "투자성향", required = true,
-            dataType = "String", defaultValue = "None")
-    @GetMapping(value = "/invest-type/{investType}")
-    public ResponseEntity<EntityModel<Map<String, Object>>> getInvestTypePortfolio(@PathVariable("investType") String investType) {
-        Map<String, Object> response = new HashMap<String, Object>();
+    @GetMapping(value = "/invest-type")
+    public ResponseEntity<EntityModel<Map<String, Object>>> getInvestTypePortfolio(@Param("investType") String investType) {
+        Map<String, Object> response = new HashMap<>();
+        System.out.println(investType);
         response.put("portfolios", portfolioService.findInvestTypePortfolio(investType));
         return ResponseEntity.ok().body(EntityModel.of(response));
     }
