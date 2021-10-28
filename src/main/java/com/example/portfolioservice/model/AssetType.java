@@ -7,7 +7,7 @@ public enum AssetType {
     cash(1, "현금성"),
     stock(2, "주식"),
     gold(3, "금"),
-    bond(4, "체권"),
+    bond(4, "채권"),
     fund(5, "펀드"),
     realEstate(6,"부동산");
 
