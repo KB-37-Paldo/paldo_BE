@@ -78,3 +78,24 @@ $ git checkout develop
 $ git pull origin develop # 변경사항 동기화
 $ git branch -d 개발완료한 브랜치 이름
 ```
+
+## 3. 전체 시스템 구조
+
+![system_architecture](README.assets/system_architecture.png)
+
+
+## 4. 포트폴리오 서비스 ERD
+
+![portfolio_erd](README.assets/portfolio_erd.png)
+
+
+## 5. 포트폴리오 서비스 API 명세
+
+1) 포트폴리오 API
+![portfolio_controller](README.assets/portfolio_controller.png)
+2) 자산 API
+![asset_controller](README.assets/asset_controller.png)
+3) 추천 API
+![recommandation_controller](README.assets/recommandation_controller.png)
+4) 유저 API
+![user_contoller](README.assets/user_controller.png)
