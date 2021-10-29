@@ -46,7 +46,7 @@ public class PortfolioServiceImpl implements PortfolioService {
 
     @Override
     public long createPortfolio(PortfolioCreateForm portfolioCreateForm) throws IOException, ParseException{
-    	
+    	sqlsession.getMapper(PortfolioMapper.class).deleteByUserId(portfolioCreateForm.getUserId());
         long targetPrice = portfolioCreateForm.getTargetPrice();
         Date targetDate = portfolioCreateForm.getTargetPeriod();
         Date toDate = new Date();
